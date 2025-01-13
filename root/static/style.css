@@ -1,0 +1,174 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300");
+
+
+:root
+{
+	--back: #131313;
+	--black: #101010;
+	--white: #eaeaea;
+	--border: #aaa;
+	--hover: #102b10;
+
+	--code: #aeaeae;
+
+	--selection-color: #f1f1f1;
+	--selection-bg: #333;
+
+	--r: #ef4747;
+	--g: #8edb72;
+}
+
+body
+{
+	background-color: var(--back);
+}
+
+*
+{
+	padding: 0px;
+	margin: 0px;
+	font-family: "Source Code Pro" , "Courier new" , monospace;
+	box-sizing: border-box;
+
+	color: #eee;
+	background: transparent;
+}
+
+/*
+body
+{
+	background-color: #222;
+}
+*/
+
+
+.code
+{
+	display: block;
+	width: fit-content;
+	padding: 0.5rem;
+	margin: 1rem auto;
+
+	color: var(--code);
+	font-size: 1.2rem;
+
+	background-color: var(--black);
+	border: 1px solid var(--border);
+
+/*	word-wrap: break-word;*/
+}
+
+.spacing
+{
+	letter-spacing: 0.55rem;
+	padding-right: 0.1rem;
+}
+.wrap
+{
+	word-wrap: break-word;
+	white-space: pre-wrap;
+	max-width: calc(100vw - 2rem);
+}
+
+
+l
+{
+	color: #eee;
+	text-shadow: 0 0 5px #f1f1f1;
+	font-weight: bold;
+}
+
+
+input[type="text"]
+{
+	display: block;
+	width: fit-content;
+
+	color: var(--code);
+	letter-spacing: 0.55rem;
+	font-size: 1.2rem;
+
+	padding: 0.5rem;
+	margin: 1rem auto;
+	background-color: var(--black);
+	border: 1px solid var(--border);
+}
+
+
+input[type="button"]
+{
+	display: block;
+	width: fit-content;
+
+	color: var(--code);
+	font-size: 1rem;
+	font-weight: bold;
+
+	padding: 1rem;
+	margin: 1rem auto;
+	background-color: var(--black);
+}
+
+
+textarea
+{
+	display: block;
+	width: calc(100vw - 2rem);
+	min-height: 3rem;
+
+	color: var(--code);
+	font-size: 1rem;
+
+	padding: 0.5rem;
+	margin: 1rem auto;
+	background-color: var(--black);
+
+	resize: vertical;
+}
+
+
+.link
+{
+	display: block;
+
+	padding: 0.3rem;
+	margin-top: 1rem;
+	background-color: var(--back);
+}
+
+
+.desc
+{
+	display: inline-block;
+	width: calc(100vw - 5rem);
+	
+	color: var(--g);
+	font-size: 1rem;
+	font-weight: bold;
+	text-align: right;
+
+	text-decoration: none !imp;
+	user-select: none;
+
+/*	border: 1px solid var(--border);*/
+/*	box-shadow: rgba(0, 0, 0, 1) 0px 0 18px 6px;*/
+/*	z-index: 100;*/
+
+/*	animation: blink-border 4s ease-in-out infinite;*/
+}
+
+.link:hover
+{
+	background-color: var(--hover);
+}
+
+
+
+
+@keyframes blink-border
+{
+	50% { border-color: var(--white); }
+}
+
+
+.hide { display: none !imp; }
