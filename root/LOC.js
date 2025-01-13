@@ -6,7 +6,7 @@ let LOC =
 			FILES: 
 			[
 				{ day:  "3", time:0050, done: 2, desc: "mul-it-over" },
-				{ day:  "4", time:0600, done: 2, desc: "xmas" },
+				{ day:  "4", time:5400, done: 2, desc: "xmas" },
 				{ day:  "5", time:0150, done: 2, desc: "print-queue" },
 				{ day:  "6", time:1200, done: 2, desc: "guard-gallivant" },
 				{ day:  "7", time:7000, done: 2, desc: "bridge-repair" },
