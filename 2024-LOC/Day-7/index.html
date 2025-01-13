@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta 
+		name = "viewport" 
+		content = "width=device-width, initial-scale=1">
+	<title></title>
+	<link rel = "stylesheet" type = "text/css" href = "../static/style.css">
+</head>
+
+<body>
+
+
+<!--HINT 
+	DAY: 7
+	end goal = 
+		all possible oper combinations nPr(with anything possible @ each block):
+		total possibles: pow( OPERS.length , exp.vals.length - 1 )
+	=> 
+		recursive(target, [oper(nums[0] , nums[1] , '+')] , nums[2:] 
+		or
+		recursive(target, [oper(nums[0] , nums[1] , '*')] , nums[2:] 
+		or
+		recursive(target, [oper(nums[0] , nums[1] , 'concat')] , nums[2:] 
+
+	/*
+	compute	 |	approach
+	---------------------------------------------------
+	6sec 	    recursive
+	9.5sec 	    linear nPr(without predefined blocks conversion 012 => +*c)
+	17sec 	    linear nPr(with predefined blocks conversion 012 => +*c )
+	---------------------------------------------------
+	*/
+
+
+	/*
+	The recursive approach in _A_recursive() works differently. It breaks down the problem into smaller sub-problems by applying operations to pairs of numbers and then recursing over the results. This significantly reduces the number of operations compared to generating all permutations.
+	The recursive approach uses a divide-and-conquer strategy, which allows it to check combinations incrementally and stop early once a valid result is found.
+
+	The recursive process doesn't require generating and storing all permutations at once, which leads to lower memory usage and, often, better performance.
+	*/
+-->
+
+<pre class="code"></pre>
+<div class="return" data="">&gt;</div>
+
+<script type="text/javascript" src="../util/util.js"></script>
+<script type="text/javascript" src="./IN.js"></script>
+<script type="text/javascript" src="./EXEC.js"></script>
+
+</body>
+</html>
