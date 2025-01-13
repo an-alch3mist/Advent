@@ -13,8 +13,9 @@ function _A()
 				recursive(U.clone(word[0]) , pos= [x, y] , dir= dir)
 			});
 
-	console.log(DOC , DOC.length);
-	// U.save_return("word search count", DOC.length);
+	console.log(DOC , `part-1 count: ${DOC.length}`);
+	U.save_return("Day-4 part-1", DOC.length);
+
 }
 
 
@@ -52,7 +53,8 @@ function _B()
 				DOC.push([x, y]);
 		}
 	//
-	console.log(DOC , DOC.length);
+	console.log(DOC , `part-2 count: ${DOC.length}`);
+	U.save_return("Day-4 part-2", DOC.length);
 }
 
 
@@ -68,5 +70,5 @@ function Gather()
 }
 
 U.title("xmas");
-// _A();
+_A();
 _B();
