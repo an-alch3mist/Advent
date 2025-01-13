@@ -84,11 +84,7 @@ function Gather()
 		line.split('').forEach((char, x) => {
 			if(char != '.')
 			{
-				let antenna = 
-				{
-					freq : char, 
-					pos: [x, y]
-				}
+				let antenna = { freq : char, pos: [x, y]}
 				ANTENNA.push(antenna);
 			}
 		});
