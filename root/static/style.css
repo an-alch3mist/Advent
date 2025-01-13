@@ -7,7 +7,7 @@
 	--black: #101010;
 	--white: #eaeaea;
 	--border: #aaa;
-	--hover: #102b10;
+	--hover: #101510;
 
 	--code: #aeaeae;
 
@@ -127,41 +127,14 @@ textarea
 }
 
 
-.link
-{
-	display: block;
 
-	padding: 0.3rem;
-	margin-top: 1rem;
-	background-color: var(--back);
-}
-
-
-.desc
-{
-	display: inline-block;
-	width: calc(100vw - 10rem);
-	
-	color: var(--g);
-	font-size: 1rem;
-	font-weight: bold;
-	text-align: right;
-
-	text-decoration: none !imp;
-	user-select: none;
+/*	user-select: none;*/
 
 /*	border: 1px solid var(--border);*/
 /*	box-shadow: rgba(0, 0, 0, 1) 0px 0 18px 6px;*/
 /*	z-index: 100;*/
 
 /*	animation: blink-border 4s ease-in-out infinite;*/
-}
-
-.link:hover
-{
-	background-color: var(--hover);
-}
-
 
 
 
@@ -169,6 +142,48 @@ textarea
 {
 	50% { border-color: var(--white); }
 }
+
+
+.link 
+{
+    display: flex;
+    justify-content: space-between;
+
+    width: calc(100vw - 20rem);
+    margin: 0.1rem auto;
+    padding: 0.3rem;
+
+	text-decoration: none;
+    background-color: var(--black);
+    border: 0.5px dotted transparent;
+}
+
+
+.link:hover
+{
+    border: 0.5px dashed var(--g) ;
+	background-color: var(--hover);
+}
+
+
+.time 
+{
+	color: var(--g);
+	font-weight: bold;
+    width: 4ch; /* Width to fit up to 4 characters */
+    text-align: left; /* Left align the numbers */
+}
+
+.desc 
+{
+	color: var(--g);
+	font-weight: bold;
+    flex-grow: 1;
+    text-align: right; /* Right align the description */
+}
+
+
+
 
 
 .hide { display: none !imp; }
