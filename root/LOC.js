@@ -5,7 +5,6 @@ let LOC =
 		{ 	val: 2024,
 			FILES: 
 			[
-
 				{ day:  "#", time: "", done: 0, desc: "" },
 				{ day:  "3", time: "  50", done: 2, desc: "mul-it-over" },
 				{ day:  "4", time: "5400", done: 2, desc: "xmas" },
