@@ -172,7 +172,7 @@ textarea
     justify-content: space-between;
 
     width: calc(100vw - 70rem);
-    min-width: 24rem;
+    min-width: 30rem;
 
     margin: 0.1rem auto;
     padding: 0.3rem;
