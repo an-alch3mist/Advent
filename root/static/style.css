@@ -8,6 +8,7 @@
 	--white: #eaeaea;
 	--border: #aaa;
 	--hover: #101510;
+	--inactive: #555555;
 
 	--code: #aeaeae;
 
@@ -129,11 +130,9 @@ textarea
 
 
 /*	user-select: none;*/
-
 /*	border: 1px solid var(--border);*/
 /*	box-shadow: rgba(0, 0, 0, 1) 0px 0 18px 6px;*/
 /*	z-index: 100;*/
-
 /*	animation: blink-border 4s ease-in-out infinite;*/
 
 
@@ -155,13 +154,20 @@ textarea
 
 	text-decoration: none;
     background-color: var(--black);
-    border: 0.5px dotted transparent;
+    border: 0.5px dashed transparent;
 }
 
 
 .link:hover
 {
     border: 0.5px dashed var(--g) ;
+	background-color: var(--hover);
+}
+
+
+.link-inactive:hover
+{
+	border: 0.5px dashed var(--r) ;
 	background-color: var(--hover);
 }
 
@@ -182,6 +188,8 @@ textarea
     text-align: right; /* Right align the description */
 }
 
+.desc-inactive
+{ color: var(--inactive); }
 
 
 
