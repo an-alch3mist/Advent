@@ -10,7 +10,7 @@ function _A()
 
 		    a.setAttribute(
 				"href", 
-				`./${year.val}/Day-${file.day}-${file.desc}/index-${file.desc}.html`
+				`./${year.val}/Day-${(file.day == '#')?"%23" : file.day}-${file.desc}/index-${file.desc}.html`
 			);
 			a.setAttribute("target", "_blank");
 
