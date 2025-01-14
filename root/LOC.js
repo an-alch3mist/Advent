@@ -7,7 +7,7 @@ let LOC =
 			[
 				{ day:  "#", time: "", done: 0, desc: "" },
 				{ day:  "3", time: "  50", done: 2, desc: "mul-it-over" },
-				{ day:  "4", time: "5400", done: 2, desc: "xmas" },
+				{ day:  "4", time: "4300", done: 2, desc: "xmas" },
 				{ day:  "5", time: " 150", done: 2, desc: "print-queue" },
 				{ day:  "6", time: "1200", done: 2, desc: "guard-gallivant" },
 				{ day:  "7", time: "7000", done: 2, desc: "bridge-repair" },
