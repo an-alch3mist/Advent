@@ -1,5 +1,5 @@
 <p align="center">
-  <a href=https://an-alch3mist.github.io/Advent/"" target="_blank" rel="noopener noreferrer">
+  <a href= "https://an-alch3mist.github.io/Advent/" target="_blank" rel="noopener noreferrer">
     <img height="50px"  src="https://github.com/an-alch3mist/Advent/blob/main/readme/advent%20of%20code.svg" alt="Advent of Code logo">
   </a>
 </p>
@@ -7,7 +7,7 @@
 <br/>
 
 <p align="center">
- <a href="https://adventofcode.com/"><code>Advent of Code</code></a> | <a href="https://github.com/an-alch3mist/Advent/tree/main/2024"><code>y = 2024</code></a>  | <a href="https://x.com/Marching_Tetrod"><code>twitter</code></a>
+ <a href="https://adventofcode.com/"><code>Advent of Code event</code></a> | <a href="https://github.com/an-alch3mist/Advent/tree/main/2024"><code>y = 2024</code></a>  | <a href="https://x.com/Marching_Tetrod"><code>twitter</code></a>
 </p>
 
 
