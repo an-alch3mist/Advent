@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="732.27802"
-   height="87.740501"
-   viewBox="0 0 193.74855 23.214675"
+   width="210.34668"
+   height="25.203438"
+   viewBox="0 0 210.34668 25.203438"
    version="1.1"
    id="svg8"
    sodipodi:docname="advent of code.svg"
@@ -39,9 +39,9 @@
      borderopacity="1"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.1718"
-     inkscape:cx="383.03133"
-     inkscape:cy="5.8684634"
+     inkscape:zoom="3.4989761"
+     inkscape:cx="108.14671"
+     inkscape:cy="-25.697831"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -72,28 +72,28 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="back"
-     transform="translate(2.9541142,2.9541133)" />
+     transform="translate(11.309681,4.6713074)" />
   <g
      inkscape:label="layer"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(2.9541142,-8.2958787)">
+     transform="translate(11.309681,-6.5786846)">
     <g
-       id="g871">
+       id="g828">
       <text
          id="text821"
          y="28.340559"
          x="94.579796"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.56244278px;line-height:1.25;font-family:Consolas;-inkscape-font-specification:'Consolas, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#4fb84a;fill-opacity:1;stroke:none;stroke-width:0.26458332;filter:url(#filter863)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Consolas;-inkscape-font-specification:'Consolas, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#4fb84a;fill-opacity:1;stroke:none;stroke-width:0.26458332;filter:url(#filter863)"
          xml:space="preserve"><tspan
-           style="fill:#4fb84a;fill-opacity:1;stroke-width:0.26458332"
+           style="font-size:26.66666603px;fill:#4fb84a;fill-opacity:1;stroke-width:0.26458332"
            y="28.340559"
            x="94.579796"
            id="tspan819"
            sodipodi:role="line">Advent of Code</tspan></text>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.56244278px;line-height:1.25;font-family:Consolas;-inkscape-font-specification:'Consolas, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#4fb84a;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Consolas;-inkscape-font-specification:'Consolas, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#4fb84a;fill-opacity:1;stroke:none;stroke-width:0.26458332"
          x="94.579796"
          y="28.293962"
          id="text825"><tspan
@@ -101,7 +101,7 @@
            id="tspan823"
            x="94.579796"
            y="28.293962"
-           style="fill:#4fb84a;fill-opacity:1;stroke-width:0.26458332">Advent of Code</tspan></text>
+           style="font-size:26.66666603px;fill:#4fb84a;fill-opacity:1;stroke-width:0.26458332">Advent of Code</tspan></text>
     </g>
   </g>
 </svg>
