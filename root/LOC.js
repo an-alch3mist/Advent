@@ -15,7 +15,7 @@ let LOC =
 				{ day:  "9", time: " 360", done: 2, desc: "disk-frag" },
 				{ day: "10", time: " 120", done: 2, desc: "hoof-it" },
 				{ day: "11", time: " 500", done: 2, desc: "plutonian-pebbles" },
-				{ day: "12", time:    ".", done: 0, desc: "...." },
+				{ day: "12", time: " 260", done: 2, desc: "garden-groups" },
 				{ day: "13", time:    ".", done: 0, desc: "...." },
 				{ day: "14", time:    ".", done: 0, desc: "...." },
 				{ day: "15", time:    ".", done: 0, desc: "...." },
