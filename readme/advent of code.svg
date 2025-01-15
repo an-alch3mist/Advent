@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="1920"
-   height="1080"
-   viewBox="0 0 507.99999 285.75001"
+   width="732.27802"
+   height="87.740501"
+   viewBox="0 0 193.74855 23.214675"
    version="1.1"
    id="svg8"
    sodipodi:docname="advent of code.svg"
@@ -39,9 +39,9 @@
      borderopacity="1"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.40616"
-     inkscape:cx="330.90118"
-     inkscape:cy="976.64621"
+     inkscape:zoom="1.1718"
+     inkscape:cx="383.03133"
+     inkscape:cy="5.8684634"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -51,7 +51,11 @@
      inkscape:window-height="1017"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
-     inkscape:window-maximized="1" />
+     inkscape:window-maximized="1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -67,12 +71,13 @@
   <g
      inkscape:groupmode="layer"
      id="layer2"
-     inkscape:label="back" />
+     inkscape:label="back"
+     transform="translate(2.9541142,2.9541133)" />
   <g
      inkscape:label="layer"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-11.249992)">
+     transform="translate(2.9541142,-8.2958787)">
     <g
        id="g871">
       <text
@@ -81,7 +86,7 @@
          x="94.579796"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:24.56244278px;line-height:1.25;font-family:Consolas;-inkscape-font-specification:'Consolas, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#4fb84a;fill-opacity:1;stroke:none;stroke-width:0.26458332;filter:url(#filter863)"
          xml:space="preserve"><tspan
-           style="fill:#4fb84a;stroke-width:0.26458332;fill-opacity:1;"
+           style="fill:#4fb84a;fill-opacity:1;stroke-width:0.26458332"
            y="28.340559"
            x="94.579796"
            id="tspan819"
