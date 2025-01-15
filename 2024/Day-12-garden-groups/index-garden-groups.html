@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta 
+		name = "viewport" 
+		content = "width=device-width, initial-scale=1">
+	<title></title>
+	<link rel = "stylesheet" type = "text/css" href = "../static/style.css">
+</head>
+
+<body>
+
+<!--HINT 
+	DAY: 12
+	end goal = 
+		part-1, flood-fill and get (POS, EDGE) for each (region):
+		part-2, flood-fill edges with imilar normal and interconnected in a region 
+				[using, flood fill of node based approach]
+	
+	/*
+		flood-fill approach?
+
+			if .explored is assigned once came accross neighbour, edge shall be return twice(while in progress of fining all-explored)
+			if .explored is assigned for every pos in POS that are not assigned, => this will fix the twice edge issue, but duplicates pos shall arise.	
+
+			to resolve this either 
+				- RED BLUE Approach
+				+ Evaluate just POS each region, later Evaluate EDGE for each region.
+	*/
+
+	// + Evaluate just POS each region, later Evaluate EDGE for each region.
+	function flood_fill(B)
+	{
+		let REGION = [];
+
+		// POS >>
+		for(let y = 0; y < h; y += 1)
+		for(let x = 0; x < w; x += 1)
+		{
+		
+			REGION.push({char: char, POS: POS, EDGE: [], SIDE: [] })
+		}
+
+		// EDGE >>
+		for(let region of REGION)
+		for(let pos of region.POS)
+		for(let dir of v2.DIRS)
+		{
+		
+		}
+		// << EDGE
+
+		return REGION;
+	}
+
+-->
+
+<pre class="code spacing"></pre>
+<div class="return" data="">&gt;</div>
+
+<script type="text/javascript" src="../util/util.js"></script>
+<script type="text/javascript" src="./IN.js"></script>
+<script type="text/javascript" src="./EXEC.js"></script>
+
+</body>
+</html>
