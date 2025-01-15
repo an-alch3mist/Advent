@@ -1,6 +1,6 @@
 /*
 	start: 00:41
-	found with flood fill over 2d, node based: 03:00 
+	found, flood-fill over 2d, node based: 03:00 
 */
 
 function _A()
@@ -26,7 +26,10 @@ function _A()
 	// each region: { char: , POS: , EDGE: {a: , b: }  }
 	let REGION = flood_fill(B); // evaluate POS .... evaluate EDGE approach
 	console.log("%cREGION:", U.css.h() , REGION);
+	
 
+	// a: next, b: curr, return a - b
+	// REGION.sort((a, b) => { return -(a.POS.length - b.POS.length); });
 
 	let sum = 0;
 	for(let region of REGION)
@@ -230,33 +233,6 @@ function flood_fill(B)
 }
 
 
-/*
-function flood_fill(B)
-{
-	let REGION = [];
-
-	// POS >>
-	for(let y = 0; y < h; y += 1)
-	for(let x = 0; x < w; x += 1)
-	{
-	
-	}
-
-	// EDGE >>
-	for(let region of REGION)
-	for(let pos of region.POS)
-	for(let dir of v2.DIRS)
-	{
-	
-	}
-	// << EDGE
-
-
-	return REGION;
-}
-*/
-
-
 // to make EDGE to node based  //
 let get_x10_edge = (pos, dir) => 
 { 
@@ -274,8 +250,11 @@ let get_x10_edge = (pos, dir) =>
 
 
 // is this edge linked to chain(neighbour-edge) of [side] with same normal dir ?
-function linked_edges_in_same_dir(EDGE)
+// Node(id: a(v2), b(v2), normal(v2)) Based flood_fill_EDGE
+function linked_edges_in_same_dir(EDGE) // or flood_fill_EDGE( char => edge.normal )
 {
+	// here char => edge.normal
+
 	let get_neighbours = (edge, EDGE) =>
 	{
 		let NEIGHBOUR_EDGE = [];
