@@ -3,6 +3,7 @@ function _A()
 	let href = (elem, val) => elem.setAttribute("href", val);
 	let main_holder = query(".holder");
 
+
 	console.log("Advent", LOC);
 	for(let year of LOC.YEAR)
 	{
