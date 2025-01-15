@@ -1,6 +1,6 @@
 <p align="center">
   <a href= "https://an-alch3mist.github.io/Advent/" target="_blank" rel="noopener noreferrer">
-    <img height="50px"  src="https://github.com/an-alch3mist/Advent/blob/main/readme/advent%20of%20code.svg" alt="Advent of Code logo">
+    <img height="50px"  src="https://github.com/an-alch3mist/Advent/blob/main/root/readme/advent%20of%20code.svg" alt="Advent of Code logo">
   </a>
 </p>
 
