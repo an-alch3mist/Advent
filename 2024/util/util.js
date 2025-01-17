@@ -221,6 +221,9 @@ let v2 =
 	DIRS: [[+1, 0], [0, +1], [-1, 0], [0, -1]],
 	DIR_CHARS: ">v<^",
 	none: [-1000000, -1000000],
+
+	dot 	: function(a, b) { return a[0] * b[0] + a[1] * b[1]; },
+	area	: function(a, b) { return a[0] * b[1] - a[1] * b[0]; },
 }
 
 
@@ -236,10 +239,10 @@ let U =
 	clipboard : (str) => navigator.clipboard.writeText(str),
 	query : (str) => document.querySelector(str),
 	title : (str) => document.title = str,
-	save_code : (str, char_pattern = /[\@]/) => 
+	save_code : (code, char_pattern = /[\@]/) => 
 	{ 
 		str = "";
-		IN.split('').forEach(char => {
+		code.split('').forEach(char => {
 			if(char_pattern.test(char))
 				str += `<l>${char}</l>`;
 			else
