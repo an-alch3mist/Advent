@@ -51,7 +51,7 @@ function Logic()
 	//
 	for(let bot of BOTS)
 		B[bot.p[1]][bot.p[0]] += 1;
-	str += `@:${0}\n${log_B(B, BOTS)}\n\n\n`;
+	str += `<l>@:${0}</l>\n${log_B(B, BOTS)}\n\n\n`;
 
 	for(let iter = 0 ; iter < 10000; iter += 1)
 	{
@@ -80,10 +80,10 @@ function Logic()
 		// << ad
 
 		if(found_line == true)
-			str += `@:${iter + 1}\n${log_B(B, BOTS)}\n\n\n`;
+			str += `<l>@:${iter + 1}</l>\n${log_B(B, BOTS)}\n\n\n`;
 	}
 
-	U.save_code(str, /[\@]/);
+	U.save_code(str, /[]/);
 	U.clipboard(str);
 }
 
@@ -134,4 +134,5 @@ function Gather()
 }
 
 U.title("restroom-redoubt");
+U.query("body").style.zoom = "50%";
 _A();
