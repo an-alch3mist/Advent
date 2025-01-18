@@ -100,5 +100,6 @@ function Gather()
 	//// << parse IN ////
 }
 
+U.zoom("70%");
 U.title("guard-gallivant");
 _A();
