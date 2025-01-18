@@ -134,5 +134,5 @@ function Gather()
 }
 
 U.title("restroom-redoubt");
-U.query("body").style.zoom = "50%";
+U.zoom("50%");
 _A();

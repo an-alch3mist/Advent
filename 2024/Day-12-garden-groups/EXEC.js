@@ -6,6 +6,7 @@
 function _A()
 {
 	console.log("somthng");
+
 	U.save_code(IN, /[X]/);
 
 	/*
@@ -20,6 +21,8 @@ function _A()
 	console.log(REGION);
 	*/
 
+	
+	// part-1 >>
 	Gather();
 	console.log("%cB:", U.css.h() , B, w, h);
 	// each b: { char: , explored?: }
@@ -27,7 +30,6 @@ function _A()
 	let REGION = flood_fill(B); // evaluate POS .... evaluate EDGE approach
 	console.log("%cREGION:", U.css.h() , REGION);
 	
-
 	// a: next, b: curr, return a - b
 	// REGION.sort((a, b) => { return -(a.POS.length - b.POS.length); });
 
@@ -40,15 +42,13 @@ function _A()
 		sum += area * perimeter;
 	}
 	console.log(`sum (area * perimeter-individual-edge): ${sum}`);
+	// << part-1
 
 
-	// let SIDE = linked_edges_in_same_dir(REGION[0].EDGE);
+	// part-2
 	for(let region of REGION)
-	{
+		// SIDE => side[], side => edge[]
 		region.SIDE = linked_edges_in_same_dir(region.EDGE);
-		// console.log(region.char , region.SIDE.length);
-	}
-
 
 	sum = 0;
 	for(let region of REGION)
@@ -60,9 +60,8 @@ function _A()
 	}
 	console.log(`sum (area * perimeter-individual-side): ${sum}`);
 	U.save_return(`Day-12 part-2`, sum);
-
+	// << part-2
 }
-
 
 
 /*
@@ -284,29 +283,32 @@ function linked_edges_in_same_dir(EDGE) // or flood_fill_EDGE( char => edge.norm
 	let EXPLORE = EDGE.map( (edge, i) => {
 		return { edge: edge, explored: false }
 	});	
-	// console.log(U.clone(EXPLORE));
 
-	// console.log(v2.area([+10, 1], [-10, -1]));
 
 	// flood-fill node based //
+	// NODE
 	for(let i0 = 0; i0 < EDGE.length; i0 += 1)
 	{
 		if(EXPLORE[i0].explored == true)
 			continue;
 
+		// region
 		let side = [];
 		side.push(EDGE[i0]);
 		EXPLORE[i0].explored = true;
 
-		//
+		// loop
 		while(true)
 		{
+			// all-explored
 			let all_explored = true;
+
+			// node
 			for(let edge of side)
 			{
 				let NEIGHBOUR_EDGE = get_neighbours(edge, EDGE);
-				// console.log("neighbour: ", edge, NEIGHBOUR_EDGE);
 
+				// neighbour
 				for(let neighbour_edge of NEIGHBOUR_EDGE)
 				{
 					// (v2.area(edge.normal, neighbour_edge.normal) == 0) // (mobius or intersection) issue
@@ -324,6 +326,7 @@ function linked_edges_in_same_dir(EDGE) // or flood_fill_EDGE( char => edge.norm
 						side B: 4,	// top-right B region
 						side B: 4,	// bottom-left B region
 					*/
+					// similar char
 					if( v2.eql(edge.normal, neighbour_edge.normal)  && 
 						EXPLORE[neighbour_edge.index].explored == false
 					)
@@ -337,6 +340,7 @@ function linked_edges_in_same_dir(EDGE) // or flood_fill_EDGE( char => edge.norm
 				//
 			}
 
+			// all-explored
 			if(all_explored)
 				break;
 		}
@@ -348,8 +352,6 @@ function linked_edges_in_same_dir(EDGE) // or flood_fill_EDGE( char => edge.norm
 	// console.log(SIDE);
 	return SIDE;
 }
-
-//
 
 
 let B = [];
@@ -369,5 +371,7 @@ function Gather()
 	//// << parse IN to STORE ////
 }
 
-// U.title("somthng");
+U.zoom("50%");
+U.title("garden-groups");
+
 _A();

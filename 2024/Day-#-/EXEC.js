@@ -5,6 +5,18 @@ function _A()
 
 	Gather();
 	console.log("%cDATA:", U.css.h() , B);
+
+	Logic();
+
+	// sum, return >>
+
+	// << sum, return	
+}
+
+
+function Logic()
+{
+	
 }
 
 

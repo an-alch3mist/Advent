@@ -6,9 +6,11 @@
 // linear approach
 // >> 124ms for 25 blinks
 // >> 500ms for 75 blinks
-// >> 880ms for 100 blinks
-// >> 15sec for 1000 blinks
+// >> 800ms for 100 blinks
+// >> 14sec for 1000 blinks
 // >> 30sec for 2000 blinks
+
+let blink_limit = 75;
 
 function _A()
 {
@@ -33,7 +35,7 @@ function _A()
 			UNQ_STONES[index].count += count;
 	}
 
-	for(let iter = 0 ; iter < 75; iter += 1)
+	for(let iter = 0 ; iter < blink_limit; iter += 1)
 	{
 		// console.log(`after ${iter} blink: UNQ_STONES`, UNQ_STONES);
 
@@ -78,24 +80,25 @@ function _A()
 	U.save_return("Day-11 part-2", `${sum / 10n ** 12n}T`);
 }
 
-
 // recursive_approach
-// >> 150ms for 25 blinks
-// >> 26sec for 75 blinks
+// >> 114ms for 25 blinks
+// >> 628ms for 75 blinks
+// >>  2sec for 100 blinks
+// >> 42sec for 1000 blinks
+
 
 function _A_recursive()
 {
-	let UNQ_STONES = IN.split(' ').map(char => {
-		return { id: parseInt(char), blink: 0, count: 1 };
-	});
 	U.save_code(IN, /[0-9]/);
 
-	console.log(UNQ_STONES);
+	for(let i0 = 0 ; i0 < blink_limit + 2; i0 += 1)
+		UNQ_STONES.push([]);
 
 	let sum = 0n;
-	for(let us of UNQ_STONES)
-		sum += BigInt(recursive(us.id, us.blink + 1));
+	for(let id of IN.split(' '))
+		sum += BigInt(recursive(parseInt(id), blink = 1));
 
+	console.log("%cUNQ_STONES", U.css.h(), UNQ_STONES);
 	console.log(`sum: ${sum}`);
 }
 
@@ -123,14 +126,14 @@ function recursive(id, blink)
 	return count
 	*/
 
-	let index = UNQ_STONES.findIndex(us => (us.id == id && us.blink == blink));
+	let index = UNQ_STONES[blink].findIndex(us => (us.id == id));
 	
 	// exist
 	if(index != -1)
-		return UNQ_STONES[index].count;
+		return UNQ_STONES[blink][index].count;
 
 	// blink-limit
-	if(blink >= 25 + 1)
+	if(blink >= blink_limit + 1)
 		return 1n;
 
 	// count
@@ -154,7 +157,7 @@ function recursive(id, blink)
 	else
 		count += recursive(id * 2024, blink + 1);
 		
-	UNQ_STONES.push({id: id, blink: blink, count: count});
+	UNQ_STONES[blink].push({id: id, blink: blink - 1, count: count});
 	return count;
 }
 

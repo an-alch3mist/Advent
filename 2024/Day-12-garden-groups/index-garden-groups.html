@@ -13,23 +13,37 @@
 
 <!--HINT 
 	DAY: 12
-	end goal = 
+	end goal =>
 		part-1, flood-fill and get (POS, EDGE) for each (region):
-		part-2, flood-fill edges with imilar normal and interconnected in a region 
-				[using, flood fill of node based approach]
-	
+		part-2, flood-fill edges constrain: (similar normal and interconnected in a region) 
+
+	flood-fill Approach:
+		NODE or B[w, h]
+			region		
+			loop:
+				all-explored
+				region-NODE	
+					NEIGHBOUR
+						similar char or constrain
+				all-explored
+			//
+			REGION.push(region)
+
+
 	/*
-		flood-fill approach?
+		flood-fill approach? 
+			
+			issue: 
+				if .explored is assigned once came accross neighbour, edge shall be return twice(while in progress of fining all-explored)
+				if .explored is assigned for every pos in POS that are not assigned, => this will fix the twice edge issue, but duplicates pos shall arise.	
 
-			if .explored is assigned once came accross neighbour, edge shall be return twice(while in progress of fining all-explored)
-			if .explored is assigned for every pos in POS that are not assigned, => this will fix the twice edge issue, but duplicates pos shall arise.	
-
-			to resolve this either 
+			to resolve this either use following Approach: 
 				- RED BLUE Approach
 				+ Evaluate just POS each region, later Evaluate EDGE for each region.
 	*/
 
-	// + Evaluate just POS each region, later Evaluate EDGE for each region.
+
+	// + Evaluate just POS for each region, later Evaluate EDGE for each region.
 	function flood_fill(B)
 	{
 		let REGION = [];

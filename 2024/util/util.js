@@ -234,11 +234,16 @@ let U =
 	// use .prototype instead //
 	GT: function(B , coord) { return B[coord[1]][coord[0]]; },
 
+	iter: 0,
+	iter_inc: (max) => { U.iter += 1; return (U.iter > max); },
+
 	delay : (ms) => new Promise(res => setTimeout(res, ms)),
 	
 	clipboard : (str) => navigator.clipboard.writeText(str),
 	query : (str) => document.querySelector(str),
 	title : (str) => document.title = str,
+	zoom : (str) => U.query(".code").style.zoom = str, // 50%
+
 	save_code : (code, char_pattern = /[\@]/) => 
 	{ 
 		str = "";
