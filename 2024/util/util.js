@@ -235,7 +235,13 @@ let U =
 	GT: function(B , coord) { return B[coord[1]][coord[0]]; },
 
 	iter: 0,
-	iter_inc: (max) => { U.iter += 1; return (U.iter > max); },
+	iter_inc: (max) => 
+	{ 
+		U.iter += 1; 
+		if(U.iter > max) 
+			console.log(`iter > ${max}`);
+		return (U.iter > max); 
+	},
 
 	delay : (ms) => new Promise(res => setTimeout(res, ms)),
 	
