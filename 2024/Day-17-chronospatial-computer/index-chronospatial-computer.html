@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta 
+		name = "viewport" 
+		content = "width=device-width, initial-scale=1">
+	<title></title>
+	<link rel = "stylesheet" type = "text/css" href = "../static/style.css">
+</head>
+
+<body>
+
+<!--HINT 
+	DAY: 17
+	end goal = get REG.a where OUTPUT == INT_CODE:
+		achived by => 
+			each octal of REG.a ..correspond_to.. each output of OUTPUT Approach:
+			so, figure out possible octal 0b000 to 0b111 at each REG.a octal that make (OUTPUT == INT_CODE)
+
+		remember:
+			each ith oct of OCT contribute to ith_from_last output of OUTPUT
+		recursive: 
+			for(let oct = 0b000n; oct <= 0b111n; oct += 1n)
+				let new_OCT = (PREV_OCT << 3n) + oct;
+				let OUTPUT = EXEC(REG.a = new_OCT, INT_CODE);
+				if(OUTPUT[0] == INT_CODE.gl(output_index_gl))
+					recursive(output_index_gl + 1, new_OCT );
+
+
+		// ad info >>
+		// * depend on decr of REG.a in INT_CODE, 
+		     meaning: method works only when decr of REG.a, in INT_CODE is achived by >> 3
+
+		an INT_CODE program must have:
+			0. decrement REG.a
+			( 
+				determines length of a program, think of it as an iter index,
+				more the decr of RED.a by <<
+				in each run, more the decrement rate
+			)
+			1. out, ( somewhere before jnz )
+			2. jnz, ( usually at the end )
+		// << ad info
+-->
+
+<pre class="code"></pre>
+<div class="return" data="">&gt;</div>
+
+<script type="text/javascript" src="../util/util.js"></script>
+<script type="text/javascript" src="./IN.js"></script>
+<script type="text/javascript" src="./EXEC.js"></script>
+
+</body>
+</html>
