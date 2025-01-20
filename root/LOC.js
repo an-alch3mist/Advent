@@ -20,7 +20,7 @@ let LOC =
 				{ day: "14", time:"    ?", done: 2, desc: "restroom-redoubt" },
 				{ day: "15", time:"  400", done: 2, desc: "warehouse-woes" },
 				{ day: "16", time:"10200", done: 2, desc: "reindeer-maze" },
-				{ day: "17", time:    ".", done: 0, desc: "...." },
+				{ day: "17", time:"  150", done: 2, desc: "chronospatial-computer" },
 				{ day: "18", time:    ".", done: 0, desc: "...." },
 				{ day: "19", time:    ".", done: 0, desc: "...." },
 				{ day: "20", time:    ".", done: 0, desc: "...." },
