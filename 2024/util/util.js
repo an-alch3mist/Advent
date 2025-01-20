@@ -213,6 +213,16 @@ Array.prototype.ST = function( depth_level_indexes, val )
 	}
 };
 
+
+Array.prototype.gl = function(index)
+{
+	if(index > this.length - 1)
+		console.log(`${index} > ${this.length} length of list`);
+	// index: 0 to .length - 1
+	return this[this.length - 1 - index];
+}
+
+
 let v2 = 
 {
 	add 	: function(a, b) { return [ a[0] + b[0] , a[1] + b[1] ]; },
