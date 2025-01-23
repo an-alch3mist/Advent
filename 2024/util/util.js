@@ -222,6 +222,44 @@ Array.prototype.gl = function(index)
 	return this[this.length - 1 - index];
 }
 
+// key_fn => get the key from given LIST element
+Array.prototype.UNQ = function(key_fn, as_map = false)
+{
+	let UNQ = new Map();
+
+	// has(key) set( key, {} ) get(key)
+	for(let val of this)
+	{
+		let key = key_fn(val);
+		if(!UNQ.has(key))
+			UNQ.set(key, { LIST: [val]});
+		else
+			UNQ.get(key).LIST.push(val);
+	}
+
+	/*
+		// Iterate and print each key and value
+		for (const [key, value] of map.entries())
+		    console.log(`Key: ${key}, Value: ${value}`);
+		// or
+		map.forEach((value, key) => console.log(`${key},${value}`))
+	*/
+	if(as_map == false)
+	{
+		let new_UNQ = [];
+		UNQ.forEach((val, key) => {
+			let new_unq = { };
+			new_unq["key"] = key;
+			new_unq["LIST"] = val.LIST;
+			new_UNQ.push(new_unq);
+		});
+		return new_UNQ;
+	}
+	else
+		return UNQ;
+}
+
+
 
 let v2 = 
 {
@@ -289,9 +327,9 @@ let U =
 	{
 		let num = U.seed;
 		// max => pow(2, 24) 
-		num = ((num << 6n) ^ num) % 16777216n; 
-		num = ((num >> 5n) ^ num) % 16777216n; 
-		num = ((num <<11n) ^ num) % 16777216n; 
+		num = ( (num << 0x6n) ^ num) & 0o77777777n;
+		num = ( (num >> 0x5n) ^ num) & 0o77777777n;
+		num = ( (num << 0xBn) ^ num) & 0o77777777n;
 
 		U.seed = num;
 		return num;
@@ -309,11 +347,8 @@ let U =
 /*
 
 recursive types:
-	check()
-	recursive()
-	example: flood-fill , DFS:
-	
-	recursive()
-	acc()
+	sequence recursive
+
+	accumulate recursive
 	example: linen-layout , plutonian-pebbles
 */
