@@ -115,7 +115,7 @@ function Disable_Collision(DOC, dc_radius = 0)
 {
 	let RED = [];
 	let BLUE = [];
-	let BLUE_explored = B.map(row => row.map(val => -1));
+	let BLUE_explored = B.map(row => row.map(val => 0));
 	RED.push({ pos: start, dist: 0, ANSC: [] });
 
 	/* { 
@@ -149,12 +149,13 @@ function Disable_Collision(DOC, dc_radius = 0)
 			continue;
 
 		// BLUE >>
-		let blue_index = BLUE.findIndex(blue => {
-			return v2.eql(blue.pos, node.pos);
-		});
 
-		if(blue_index != -1)
+		if(BLUE_explored.GT(node.pos) == 1)
 		{
+			let blue_index = BLUE.findIndex(blue => {
+				return v2.eql(blue.pos, node.pos);
+			});
+
 			let blue = BLUE[blue_index];
 			if(blue.dist == node.dist)
 				for(let ansc of node.ANSC)
@@ -167,7 +168,7 @@ function Disable_Collision(DOC, dc_radius = 0)
 		// console.log(CC, node.pos);
 		for(let cc of CC)
 		{
-			if(BLUE_explored.GT(cc.coord) == 1)
+			if(BLUE_explored.GT(cc.coord) == 1) // .saved_dist shall be -ve
 				continue;
 
 			let dc_node = 
@@ -206,9 +207,7 @@ function Disable_Collision(DOC, dc_radius = 0)
 	return DC_NODE;
 }
 
-
 // get non wall concentric circular coordinates
-
 let CC_LUT = [];
 let get_NW_CON_CCOORD = function(B, pos, max_radius)
 {
@@ -217,7 +216,8 @@ let get_NW_CON_CCOORD = function(B, pos, max_radius)
 	let w = B[0].length; h = B.length;
 	let get_dist = ([x, y]) => Math.abs(x) + Math.abs(y);
 
-	if(CC_LUT.length == 0)	// 2sec to 200ms for 15x15 B
+	// INITIALIZE LUT
+	if(CC_LUT.length == 0)	//  B
 	{
 		for(let r = max_radius; r >= 0; r -= 1)
 		for(let y = -r; y <= +r; y += 1) 
@@ -243,7 +243,6 @@ let get_NW_CON_CCOORD = function(B, pos, max_radius)
 	}
 	return CC;
 }
-
 
 
 let B;

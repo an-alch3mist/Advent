@@ -13,27 +13,33 @@
 
 <!--HINT 
 	DAY: 20
-	end goal = saved time by hoping through walls
+	end goal = saved time by hoping through walls, of certain radius(concentric)
 		achived by =>
-			# Look UP approach for:
-				DIST_DOC_2D: [,] 
-				DC_2D: [,][] 
-				BLUE_2D_E: [,]
+			# Look UP approach for:	// on 141 x 141 B.
+				DIST_from_start: [,]  [must] 
+				BLUE_explored: [,],   		 saved 1500ms
+				LUT: [], for CC		  [must] saved 80000ms
 
-			let DIST_DOC = pathfind(B, start, end);
-			/*
-				when collision is disabled at a node_wall.pos
-				the next hop shall be one of concentric circle non wall coord, with 
-					max-radius: 1 // part-1: 1, part-2: 19
-					origin: node_wall.pos
+	let dc_node = 
+		start_dc: node.pos,
+		end_dc: cc.coord,
+		r: cc.r,
+		total_dist: 
+			dist(start_to_start_dc) + 
+			radius + 
+			dist(end_dc_to_end)  
 
-				each cc of CC got { coord: , r:  }
 
-				so distance accived from this cc.coord =>
-					wall_node.dist + 
-					cc.r + 
-					distance from cc.coord to end
-			*/
+	// Logic()
+	function Logic()
+		let DOC = pathfind(B, start, end);
+		let DC_NODE = Disable_Collision(DOC, dc_radius = 20);
+		let min_save = 100;
+
+		let sum = 0;
+		for(let dc_node of DC_NODE)
+			if(dc_node.saved_dist >= min_save)
+				sum += 1;
 
 -->
 
