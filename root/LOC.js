@@ -6,6 +6,7 @@ let LOC =
 			FILES: 
 			[
 				{ day:  "#", time:"     ", done: 0, desc: "" },
+				{ day:  "1", time:"   80", done: 2, desc: "historian-hysteria" },
 				{ day:  "3", time:"   50", done: 2, desc: "mul-it-over" },
 				{ day:  "4", time:" 4300", done: 2, desc: "xmas" },
 				{ day:  "5", time:"  150", done: 2, desc: "print-queue" },
@@ -23,7 +24,7 @@ let LOC =
 				{ day: "17", time:"  150", done: 2, desc: "chronospatial-computer" },
 				{ day: "18", time:"  150", done: 2, desc: "ram-run" },
 				{ day: "19", time:"  230", done: 2, desc: "linen-layout" },
-				{ day: "20", time:" 1100", done: 1, desc: "race-condition" },
+				{ day: "20", time:" 1700", done: 2, desc: "race-condition" },
 				{ day: "21", time:    ".", done: 0, desc: "...." },
 				{ day: "22", time:    ".", done: 0, desc: "...." },
 				{ day: "23", time:    ".", done: 0, desc: "...." },
