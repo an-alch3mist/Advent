@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta 
+		name = "viewport" 
+		content = "width=device-width, initial-scale=1">
+	<title></title>
+	<link rel = "stylesheet" type = "text/css" href = "../static/style.css">
+</head>
+
+<body>
+
+<!--HINT 
+	DAY: 21
+	end goal = minimum key combination on DIR_PAD, 
+		achived by => 
+
+			Accumulate (DOC_COUNT for each level) approach
+			```
+			DOC_COUNT = [Map(), Map(), Map() .... ].length = max_bot_level,
+			recursive(from_to, level)
+				at level == DOC_COUNT.length - 1 // (human)
+					doc_count.set(from_to, 1)
+					return 1 	// just press the key
+		
+				// non empty possible ways(from_char to_char) .... at #(level 1)
+				WAY = NE_WAY(from, to, PAD)
+
+				// accumulate approach >>
+				let COUNT = [];
+				for(let way of WAY)
+					count = 0
+					curr = 'A'
+					for(let char of way)
+						count += recursive(curr + char, level + 1)
+					COUNT.push(count)
+
+				let min_count = COUNT.minMax((a, b) => {return a - b});
+				doc_count.set(from_to, min_count)
+				
+				return min_count
+				// << accumulate approach
+			```	
+-->
+
+<pre class="code"></pre>
+<div class="return" data="">&gt;</div>
+
+<script type="text/javascript" src="../util/util.js"></script>
+<script type="text/javascript" src="./IN.js"></script>
+<script type="text/javascript" src="./EXEC.js"></script>
+
+</body>
+</html>
