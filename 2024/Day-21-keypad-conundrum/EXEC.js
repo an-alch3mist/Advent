@@ -205,5 +205,5 @@ function Gather()
 	// << parse IN here
 }
 
-U.title("keypad-conundrum");
+U.title("keypad-conundrum"); U.zoom("80%");
 _A();
