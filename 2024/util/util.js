@@ -114,8 +114,6 @@ function index_of_node(node , LIST)
 .findIndex()
 .includes()
 
-
-
 Test name	  	| Executions per second
 ----------------|----------------------
 Array.some		|   49823.3 Ops/sec
@@ -126,7 +124,6 @@ Array.find		|   65631.2 Ops/sec
 
 source: https://www.measurethat.net/Benchmarks/Show/9045/0/some-vs-filter-vs-indexof-vs-includes-vs-find
 */
-
 
 
 // .length: 1 000 000 , in 8ms //
@@ -159,7 +156,7 @@ Array.prototype.minMax = function( cmp_fn , splice = false)
 
 
 // checked .... dimesion x, y, z .... checked again //
-// if error : wither out of range coords or incorrect [int , int] format
+// if error : either out of range coords or incorrect [int , int] format
 Array.prototype.GT = function( depth_level_indexes )
 {
 	try
@@ -214,6 +211,7 @@ Array.prototype.ST = function( depth_level_indexes, val )
 };
 
 
+// get last: ...... 2, 1, 0
 Array.prototype.gl = function(index)
 {
 	if(index > this.length - 1)
@@ -266,9 +264,17 @@ let v2 =
 	add 	: function(a, b) { return [ a[0] + b[0] , a[1] + b[1] ]; },
 	diff   	: function(a, b) { return [ a[0] - b[0] , a[1] - b[1] ]; },
 	eql 	: function(a, b) { return (a[0] == b[0]) && (a[1] == b[1]); },
+	none: [-(10**6), -(10**6)],
+
 	DIRS: [[+1, 0], [0, +1], [-1, 0], [0, -1]],
 	DIR_CHARS: ">v<^",
-	none: [-1000000, -1000000],
+	CHAR_to_DIR: new Map(
+	[
+		['>', [+1,  0]],
+		['v', [ 0, +1]],
+		['<', [-1,  0]],
+		['^', [ 0, -1]],
+	]),
 
 	dot 	: function(a, b) { return a[0] * b[0] + a[1] * b[1]; },
 	area	: function(a, b) { return a[0] * b[1] - a[1] * b[0]; },
@@ -283,7 +289,7 @@ let U =
 	GT: function(B , coord) { return B[coord[1]][coord[0]]; },
 
 	iter: 0,
-	iter_inc: (max) => 
+	iter_inc: (max = 10**2) => 
 	{ 
 		U.iter += 1; 
 		if(U.iter > max) 
@@ -317,7 +323,26 @@ let U =
 	},
 	css:
 	{ 
-		h: (str = "#888") => `font-size: 13px ;background-color:${str}; font-weight: bold; padding: 3px`,
+		// same as html inline style value
+		h: (bg = "#777") => 
+			`font-size: 14px; 
+			 background-color:${bg}; 
+			 font-weight: bold; 
+			 padding: 3px;`,
+
+		h2g: (shadow = false , color = "#aff5b4", bg = "#033a16") => 
+			`font-size: 12px; 
+			 background-color:${bg}; 
+			 ${(shadow)? `text-shadow: 0 0 3px #f1f1f1`: ' '};
+			 color: ${color};
+			 padding: 1px;`,
+
+		h2r: (shadow = true, color = "#f5afaf", bg = "#3a0303") => 
+			`font-size: 12px; 
+			 background-color:${bg}; 
+			 ${(shadow)? `text-shadow: 0 0 3px #f1f1f1`: ' '};
+			 color: ${color};
+			 padding: 1px;`,
 	},
 
 	// initialize seed
@@ -344,8 +369,87 @@ let U =
 }
 
 
-/*
+let ITER =
+{
+	// permutations with repeated elements.
+	// 1 000 0000 combinations in 800ms
+	permutations: (str) =>
+	{
+		let UNQ = new Map();
+		for(let char of str)
+		{
+			if(UNQ.has(char))
+				UNQ.get(char).count += 1;
+			else
+				UNQ.set(char, { count: 1 });
+		}
 
+		let STR = [];
+
+		// undo recursive approach or (backtrack)
+		// >> 145ms
+		function recursive(seq, remaining, UNQ)
+		{
+			// success
+			if(remaining == 0)
+			{
+				STR.push(seq);
+				return;
+			}
+
+			for(let char of UNQ.keys())
+				if(UNQ.get(char).count > 0)
+				{
+					UNQ.get(char).count -= 1; // remove char
+					recursive(seq + char, remaining - 1, UNQ);			
+					UNQ.get(char).count += 1;	// undo changes and go to 1 level above
+				}
+		}
+		recursive("", str.length, UNQ);
+
+
+		/*
+		SEQ Approach
+		// >> 1.4sec
+		function recursive(seq, level, UNQ)
+		{
+			// console.log(seq, level, UNQ);
+			// success
+			if(level == 0)
+			{
+				STR.push(seq);
+				return;
+			}
+
+			for(let [key, value] of UNQ)
+				if(value.count > 0)
+				{
+					let new_seq = seq + key;
+
+					let new_UNQ = U.clone(UNQ);
+					new_UNQ.get(key).count -= 1;
+					recursive(new_seq, level - 1, new_UNQ);
+				}
+			
+		}
+		recursive("", str.length, UNQ);
+		*/
+		return STR;
+	},
+
+	iter: 0,
+	inc : (max = 10**2) => 
+	{ 
+		ITER.iter += 1; 
+		if(ITER.iter > max) 
+			console.log(`iter > ${max}`);
+		return (ITER.iter > max); 
+	},
+}
+
+
+
+/*
 recursive types:
 	sequence recursive
 
