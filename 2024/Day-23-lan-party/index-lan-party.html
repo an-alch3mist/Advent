@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta 
+		name = "viewport" 
+		content = "width=device-width, initial-scale=1">
+	<title></title>
+	<link rel = "stylesheet" type = "text/css" href = "../static/style.css">
+</head>
+
+<body>
+
+<!--HINT 
+	DAY: 23
+	end goal = LARGEST NETWORK NODE:
+	achived by =>
+		```
+		from IN
+			# store node with unique id in them, in this case 2 letter word
+			# similarly for edge: ids of two node alphabetically ordered .join('_')
+
+		for(edge_a in a.EDGE)
+		for(edge_b in b.EDGE)
+			# for a triangle 3 node ids from a, b, care ordered alphabetically and .join('_')
+			if edge_a.other == edge_b.other
+				TRI.push(id: , a: , b: , c: )	
+
+		if this tri does not exist in TRI, which can be seen by (tri.id) simple way
+			TRI.push(tri)
+
+		// finally
+		NODE.sort((a, b) => { return -(a.TRI.length - b.TRI.length) })
+		```
+-->
+
+<pre class="code"></pre>
+<div class="return" data="">&gt;</div>
+
+<script type="text/javascript" src="../util/util.js"></script>
+<script type="text/javascript" src="./IN.js"></script>
+<script type="text/javascript" src="./EXEC.js"></script>
+
+</body>
+</html>

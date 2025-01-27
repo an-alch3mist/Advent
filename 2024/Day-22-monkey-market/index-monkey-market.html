@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta 
+		name = "viewport" 
+		content = "width=device-width, initial-scale=1">
+	<title></title>
+	<link rel = "stylesheet" type = "text/css" href = "../static/style.css">
+</head>
+
+<body>
+
+<!--HINT 
+	DAY: 22
+	end goal-a = sum(gpr(for a initial seed for 2000 iter))
+	// >> 400ms
+	achived by =>
+		(seed) // BigInt
+		let new_0 = seed <<  6n; seed = (new_0 xor seed) & 0o77777777n;
+		let new_1 = seed >>  5n; seed = (new_1 xor seed) & 0o77777777n;
+		let new_2 = seed << 11n; seed = (new_2 xor seed) & 0o77777777n;
+		return seed;
+
+	end goal = max(for a certain 4-seq get sum(first occurence banana-count for a certain buyer)):
+	// >> 5500ms
+	optimised by:
+		use Map() 								// must
+		use key as int instead of seq.join('_') // saved >> 2000ms
+			19^0 * ([0] + 9) + 19^1 * ([1] + 9) ....
+		
+-->
+
+<pre class="code"></pre>
+<div class="return" data="">&gt;</div>
+
+<script type="text/javascript" src="../util/util.js"></script>
+<script type="text/javascript" src="./IN.js"></script>
+<script type="text/javascript" src="./EXEC.js"></script>
+
+</body>
+</html>
