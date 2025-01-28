@@ -26,9 +26,9 @@ let LOC =
 				{ day: "20", time:" 1700", done: 2, desc: "race-condition" },
 				{ day: "21", time:"  100", done: 2, desc: "keypad-conundrum" },
 				{ day: "22", time:" 5500", done: 2, desc: "monkey-market" },
-				{ day: "23", time:" 2000", done: 2, desc: "LAN-party" },
+				{ day: "23", time:" 2000", done: 2, desc: "lan-party" },
 				{ day: "24", time:"    ?", done: 2, desc: "crossed-wires" },
-				{ day: "25", time:    ".", done: 0, desc: "...." },
+				{ day: "25", time:"   80", done: 2, desc: "code-chronicle" },
 			], 
 		},
 
