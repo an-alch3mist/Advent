@@ -5,7 +5,7 @@
 function _A()
 {
 	// console.log("somthng");
-	// U.save_code(IN, /[#]/);
+	U.save_code(IN, /[#]/);
 
 	Gather();
 	console.log("%cLOCK:", U.css.h() , LOCK);
