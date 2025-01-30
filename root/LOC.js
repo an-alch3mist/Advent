@@ -32,10 +32,25 @@ let LOC =
 			], 
 		},
 
-		{ 	val: 2023,
+		{ 	val: 2019,
 			FILES: 
 			[
-				// { day: 1, time: "   .", done: 0, desc: "...." },
+				{ day:  "#", time:"     ", done: 0, desc: "" },
+				{ day:  "2", time:"  120", done: 2, desc: "1202-program-alarm" },
+				{ day:  "3", time:"  130", done: 2, desc: "crossed-wires" },
+				{ day:  "5", time:"    .", done: 0, desc: " " },
+				{ day:  "7", time:"    .", done: 0, desc: " " },
+				{ day:  "9", time:"    .", done: 0, desc: " " },
+				{ day: "11", time:"    .", done: 0, desc: " " },
+				{ day: "13", time:"    .", done: 0, desc: " " },
+				{ day: "15", time:"    .", done: 0, desc: " " },
+				{ day: "17", time:"    .", done: 0, desc: " " },
+				{ day: "19", time:"    .", done: 0, desc: " " },
+				{ day: "21", time:"    .", done: 0, desc: " " },
+				{ day: "23", time:"    .", done: 0, desc: " " },
+				{ day: "25", time:"    .", done: 0, desc: " " },
+				
+				// { day:  "0", time:"    .", done: 0, desc: "desc" },
 				//
 			], 
 		},

@@ -31,10 +31,10 @@ function _A()
 			let timeSpan = elem("span", "time", file.time);
 
 	    	// desc
-			let descSpan = elem("span", "desc", `<l>${file.desc}</l> ${file.day}` );
+			let descSpan = elem("span", "desc", `<l>${file.desc.replace(/\-/, ' ')}</l> ${file.day}` );
 
 			// inactive
-		    if(file.time == '.')
+		    if(/\s*\./.test(file.time) == true)
 		    {
 		    	// a
 				a.setAttribute("target", "_self");

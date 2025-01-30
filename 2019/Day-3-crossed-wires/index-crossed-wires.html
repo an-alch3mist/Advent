@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta 
+		name = "viewport" 
+		content = "width=device-width, initial-scale=1">
+	<title></title>
+	<link rel = "stylesheet" type = "text/css" href = "../static/style.css">
+</head>
+
+<body>
+
+<!--HINT 
+	DAY: 3
+	end goal = get intersections of Wires:
+		achived by =>
+		// vector approach @(L > 0 && L < 1) //
+
+		```
+		get_intersect_2D(a, na, b, nb)
+			if(v2.area(na, nb) == 0) // parellel
+				return v2.none;
+
+			let La =  (v2.area(b, nb) - v2.area(a, nb)) / v2.area(na, nb);
+			let Lb =  (v2.area(a, na) - v2.area(b, na)) / v2.area(nb, na);
+
+			let p = v2.add(a, v2.mul(na, La));
+			return { 
+				p: p, 
+				// intersection occur @(La > 0 && La < 1) and same goes for Lb
+				occur: La > 0 && La < 1 && Lb > 0 && Lb < 1,
+				La: La,
+				Lb: Lb,
+			}; 
+		```
+-->
+
+<pre class="code wrap"></pre>
+<div class="return" data="">&gt;</div>
+
+<script type="text/javascript" src="../util/util.js"></script>
+<script type="text/javascript" src="./IN.js"></script>
+<script type="text/javascript" src="./EXEC.js"></script>
+
+</body>
+</html>

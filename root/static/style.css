@@ -31,7 +31,7 @@ body
 	font-family: "Source Code Pro" , "Courier new" , monospace;
 	box-sizing: border-box;
 
-	color: #eee;
+/*	color: #eee;*/
 	background: transparent;
 }
 
@@ -163,6 +163,8 @@ textarea
 
 	font-weight: bold;
 	font-size: 2rem;
+
+	color: var(--white);
 }
 
 
@@ -177,6 +179,7 @@ textarea
     margin: 0.1rem auto;
     padding: 0.3rem;
 
+    color: var(--g);
 	text-decoration: none;
     background-color: var(--black);
     border: 0.5px dashed transparent;
@@ -189,6 +192,10 @@ textarea
 	background-color: var(--hover);
 }
 
+.link-inactive
+{
+	color: var(--inactive);
+}
 
 .link-inactive:hover
 {
@@ -199,9 +206,9 @@ textarea
 
 .time 
 {
-	color: var(--g);
+/*	color: var(--g);*/
 	font-weight: bold;
-    width: 5ch; /* Width to fit up to 5 characters, upto 20000 */
+    width: 5ch; /* Width to fit up to 5 characters, upto 20000, else optimization must be done. */
     text-align: left; /* Left align the numbers */
 }
 
