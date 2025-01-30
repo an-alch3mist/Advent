@@ -31,7 +31,7 @@ function _A()
 			let timeSpan = elem("span", "time", file.time);
 
 	    	// desc
-			let descSpan = elem("span", "desc", `<l>${file.desc.replace(/\-/, ' ')}</l> ${file.day}` );
+			let descSpan = elem("span", "desc", `<l>${file.desc.replace(/\-/g, ' ')}</l> ${file.day}` );
 
 			// inactive
 		    if(/\s*\./.test(file.time) == true)
