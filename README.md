@@ -7,7 +7,7 @@
 <br/>
 
 <p align="center">
- <a href="https://adventofcode.com/"><code>Advent of Code event</code></a> | <a href="https://github.com/an-alch3mist/Advent/tree/main/2024"><code>let y = 2024</code></a>  | <a href="https://x.com/Marching_Tetrod"><code>twitter</code></a>
+	 <a href="https://adventofcode.com/"><code>Advent of Code event</code></a> | <a href="https://github.com/an-alch3mist/Advent/tree/main/2024"><code>let y = 2024</code></a>  | <a href="https://x.com/Marching_Tetrod"><code>twitter</code></a>
 </p>
 
 
@@ -32,4 +32,14 @@
 # text in gray
 @@ text in purple (and bold)@@
 -->
-[```an-alch3mist.github.io/Advent/```](https://an-alch3mist.github.io/Advent/)
+
+<p align="center">
+	 <a href="https://an-alch3mist.github.io/Advent/"><code>an-alch3mist.github.io/Advent/</code></a>
+</p>
+
+
+```diff
+#	include the following in ./index-desc.html
+-	<script src="https://unpkg.com/advent-2024@latest/util.js"></script>
+```
+
