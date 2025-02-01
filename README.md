@@ -34,7 +34,7 @@
 -->
 
 <p align="center">
-	 <a href="https://an-alch3mist.github.io/Advent/"><code>an-alch3mist.github.io/Advent/</code></a>
+	 <a href="https://unpkg.com/advent-2024@latest/util/util.js"><code>an-alch3mist.github.io/Advent/</code></a>
 </p>
 
 
