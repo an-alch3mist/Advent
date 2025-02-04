@@ -1,0 +1,179 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300");
+
+
+:root
+{
+	--back: #131313;
+	--black: #101010;
+	--white: #eaeaea;
+	--border: #aaa;
+
+	--code: #aeaeae;
+
+	--selection-color: #f1f1f1;
+	--selection-bg: #333;
+
+	--r: #ef4747;
+	--g: #8edb72;
+}
+
+body
+{
+	background-color: var(--back);
+}
+
+*
+{
+	padding: 0px;
+	margin: 0px;
+	font-family: "Source Code Pro" , "Courier new" , monospace;
+	box-sizing: border-box;
+
+	color: #eee;
+	background: transparent;
+}
+
+/*
+body
+{
+	background-color: #222;
+}
+*/
+
+
+.code
+{
+	display: block;
+	width: fit-content;
+	padding: 0.5rem;
+	margin: 1rem auto;
+
+	color: var(--code);
+	font-size: 1.2rem;
+
+	background-color: var(--black);
+	border: 1px solid var(--border);
+	cursor: context-menu;
+
+/*	word-wrap: break-word;*/
+}
+
+.spacing
+{
+	letter-spacing: 0.5rem;
+	padding-right: 0.1rem;
+}
+.wrap
+{
+	word-wrap: break-word;
+	white-space: pre-wrap;
+	max-width: calc(100vw - 2rem);
+}
+
+
+l
+{
+	color: #eee;
+	text-shadow: 0 0 5px #f1f1f1;
+	font-weight: bold;
+}
+
+
+input[type="text"]
+{
+	display: block;
+	width: fit-content;
+
+	color: var(--code);
+	letter-spacing: 0.55rem;
+	font-size: 1.2rem;
+
+	padding: 0.5rem;
+	margin: 1rem auto;
+	background-color: var(--black);
+	border: 1px solid var(--border);
+}
+
+
+input[type="button"]
+{
+	display: block;
+	width: fit-content;
+
+	color: var(--code);
+	font-size: 1rem;
+	font-weight: bold;
+
+	padding: 1rem;
+	margin: 1rem auto;
+	background-color: var(--black);
+}
+
+
+textarea
+{
+	display: block;
+	width: calc(100vw - 2rem);
+	min-height: 3rem;
+
+	color: var(--code);
+	font-size: 1rem;
+
+	padding: 0.5rem;
+	margin: 1rem auto;
+	background-color: var(--black);
+
+	resize: vertical;
+}
+
+
+.return
+{
+	display: none;
+	position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 75vw;
+    min-width: fit-content;
+    max-width: fit-content;
+
+	background-color: var(--back);
+	border: 1px solid var(--border);
+	color: var(--g);
+	padding: 2rem;
+	font-size: 1rem;
+	font-weight: bold;
+	text-align: center;
+
+	user-select: none;
+
+	box-shadow: rgba(0, 0, 0, 1) 0px 0 18px 6px;
+	z-index: 100;
+
+	animation: blink-border 4s ease-in-out infinite;
+}
+
+@keyframes blink-border
+{
+	50% { border-color: var(--white); }
+}
+
+
+canvas
+{
+	display: block;
+	border: 1px solid var(--border);
+	margin: 1rem auto;
+	background-color: transparent;
+
+	width: 512px;
+	height: auto;
+
+	image-rendering: pixelated;
+}
+
+
+
+.hide { display: none !imp; }

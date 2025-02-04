@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta 
+		name = "viewport" 
+		content = "width=device-width, initial-scale=1">
+	<title></title>
+	<link rel = "stylesheet" type = "text/css" href = "../static/style.css">
+</head>
+
+<body>
+
+<!--HINT 
+	DAY: 7
+	end goal = sort based approach, based on hand_type
+
+	achived by =>
+		for part-1
+		[sort] approach, 
+		
+		# always remeber a: next, b: curr
+		# always return -1, 0, +1, based on fn(a) - fn(b), 
+
+		.sort((a, b) => 
+		{
+			if(fn(a) != fn(b))
+				return fn(a) - fn(b);
+			else
+				find a card that is different in b card
+				return -(CARD.indexOf(a), CARD.indexOf(b));
+			
+			// none
+			return 0;
+		});
+-->
+
+<pre class="code"></pre>
+<div class="return" data="">&gt;</div>
+
+<script type="text/javascript" src="../util/util.js"></script>
+<script type="text/javascript" src="./IN.js"></script>
+<script type="text/javascript" src="./EXEC.js"></script>
+
+</body>
+</html>
