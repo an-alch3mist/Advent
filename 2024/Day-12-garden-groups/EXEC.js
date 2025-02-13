@@ -128,7 +128,7 @@ function flood_fill__red_blue(B)
 			B.GT(red).explored = true;
 
 			// neighbours
-			for(let dir of v2.DIRS)
+			for(let dir of v2.DIR)
 			{
 				let [X, Y] = v2.add(red, dir);
 
@@ -186,7 +186,7 @@ function flood_fill(B)
 			let all_explored = true
 
 			for(let pos of POS)
-			for(let dir of v2.DIRS)
+			for(let dir of v2.DIR)
 			{
 				let [X, Y] = v2.add(pos, dir);
 
@@ -213,7 +213,7 @@ function flood_fill(B)
 	// EDGE >>
 	for(let region of REGION)
 	for(let pos of region.POS)
-	for(let dir of v2.DIRS)
+	for(let dir of v2.DIR)
 	{
 		let [X, Y] = v2.add(pos, dir);
 

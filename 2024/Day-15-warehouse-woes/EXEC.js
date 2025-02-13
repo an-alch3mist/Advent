@@ -2,7 +2,6 @@
 	start: 01:08
 	found: 2:10
 */
-
 function _A()
 {
 	U.save_code(IN.split("\n\n")[0], /[@]/);
@@ -13,7 +12,6 @@ function _A()
 	console.log("%cMOVE", U.css.h(), MOVE);
 
 	Logic();
-
 	// sum >> 
 	let sum = 0;
 	for(let box of BOX)
@@ -23,7 +21,6 @@ function _A()
 	U.save_return(`Day-15 part-2`, sum);
 	// << sum
 }
-
 
 // LIST approach >> 400ms
 // TODO: GRID approach >> 160ms(regardless of BOX.count)
@@ -86,12 +83,16 @@ function recursive(pos, dir)
 		for(let offset of box.OFFSET)
 		{
 			let next_pos = v2.add(v2.add(box.pos, offset), dir);
-			recursive(next_pos, dir)
+			// recursive
+			recursive(next_pos, dir);
+
+			// found a wall after a recursive
+			if(wall_ahead == true) 
+				return;
 		}
 	}
 }
 // << recursive[accumulate to storage approach]
-
 
 function log_B(B, curr, BOX)
 {
@@ -125,7 +126,6 @@ function log_B(B, curr, BOX)
 	STR.forEach(row => str += row.join('') + '\n' );
 	return str;
 }
-
 
 let B = [];
 let w; let h;
@@ -164,7 +164,7 @@ function Generate()
 	// MOVE
 	IN.split("\n\n")[1].split('\n').forEach(line => {
 		line.split('').forEach( char => {
-			MOVE.push(v2.DIRS[v2.DIR_CHARS.indexOf(char)]);
+			MOVE.push(v2.DIR[v2.DIR_CHARS.indexOf(char)]);
 		});
 	});
 

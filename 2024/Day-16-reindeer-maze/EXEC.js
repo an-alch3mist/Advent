@@ -5,7 +5,6 @@
 	get_dist: 22:45 .... resume
 	found: 01:30
 */
-
 function _A()
 {
 	// console.log("somthng");
@@ -37,10 +36,12 @@ function _A()
 let DOC_se; // BLUE, node as end_node, fn: get_dist(pos)
 function Logic()
 {
+	// DOC_se storage
 	DOC_se = pathfind(B, start, end, START_DIR = [0,]);
 	console.log("%cDOC_se", U.css.h() , DOC_se);
 	
 	// whether the tile is on one of the best paths through the maze
+	// BEST_PATH storage
 	get_BEST_PATH(DOC_se.node, []);
 	console.log("%cBEST_PATH", U.css.h() , BEST_PATH);
 }
@@ -99,6 +100,7 @@ function pathfind(B, start, end, START_DIR)
 		if(blue_index != -1)
 		{
 			let blue = BLUE[blue_index];
+			// blue.ansc
 			if(blue.dist == node.dist)
 				for(let ansc of node.ansc)
 					blue.ansc.push(ansc);
@@ -116,7 +118,7 @@ function pathfind(B, start, end, START_DIR)
 		// neighbours >>
 		
 		// forward
-		let dir = v2.DIRS[node.dir];
+		let dir = v2.DIR[node.dir];
 		RED.push({pos: v2.add(node.pos, dir), dir: node.dir, dist: node.dist + 1, ansc: [node]});
 		// dir + 1
 		RED.push({pos: node.pos, dir: (node.dir + 1) % 4, dist: node.dist + 1000, ansc: [node]});

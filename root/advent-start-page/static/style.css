@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+:root
+{
+	--white: #F0F6FC;
+	--gray: #9198a1;
+	--dark: #151B23;
+	--black: #0D1117;
+
+	--high-g: #aff5b4;
+	--high-g-back: #033a16;
+
+	--high-r: #ffdcd7;
+	--high-r-back: #67060c ;
+
+	--link-blue: #4493F8;
+	--link-blue-back: #656c7633;
+}
+
+body
+{
+	background-color: var(--black);
+}
+
+*
+{
+	padding: 0px;
+	margin: 0px;
+	font-family: "Source Code Pro" , "Courier new" , monospace;
+	box-sizing: border-box;
+
+/*	color: #eee;*/
+	background: transparent;
+}
+
+
+p
+{
+	color: var(--white);
+}
+
+.link-blue
+{
+	color: var(--link-blue);
+	background-color: var(--link-blue-back);
+	font-size: 14px;
+	padding: 5px;
+}
+
+
+.read
+{
+	font-size: 13.5px;
+	line-height: 20px;
+	color: var(--white);
+
+	display: block;
+	width: calc(100vw - 2rem);
+	max-width: 70rem;
+	background-color: var(--dark);
+
+	margin: 2rem auto;
+	padding: 1rem;
+	border-radius: 8px;
+
+	white-space: pre-wrap;
+}
+
+l-green
+{
+	color: var(--high-g);
+	background-color: var(--high-g-back);
+}
+
+l-gray
+{
+	color: var(--gray);
+	background-color: transparent;
+}
+
+l-red
+{
+	color: var(--high-r);
+	background-color: var(--high-r-back);
+}
+
+
+
+.hide { display: none !imp; }

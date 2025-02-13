@@ -7,8 +7,6 @@
 	--black: #101010;
 	--white: #eaeaea;
 	--border: #aaa;
-	--hover: #101510;
-	--inactive: #555555;
 
 	--code: #aeaeae;
 
@@ -31,7 +29,7 @@ body
 	font-family: "Source Code Pro" , "Courier new" , monospace;
 	box-sizing: border-box;
 
-/*	color: #eee;*/
+	color: #eee;
 	background: transparent;
 }
 
@@ -55,13 +53,14 @@ body
 
 	background-color: var(--black);
 	border: 1px solid var(--border);
+	cursor: context-menu;
 
 /*	word-wrap: break-word;*/
 }
 
 .spacing
 {
-	letter-spacing: 0.55rem;
+	letter-spacing: 0.5rem;
 	padding-right: 0.1rem;
 }
 .wrap
@@ -128,14 +127,33 @@ textarea
 }
 
 
+.return
+{
+	display: none;
+	position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-/*	user-select: none;*/
-/*	border: 1px solid var(--border);*/
-/*	box-shadow: rgba(0, 0, 0, 1) 0px 0 18px 6px;*/
-/*	z-index: 100;*/
-/*	animation: blink-border 4s ease-in-out infinite;*/
+    width: 75vw;
+    min-width: fit-content;
+    max-width: fit-content;
 
+	background-color: var(--back);
+	border: 1px solid var(--border);
+	color: var(--g);
+	padding: 2rem;
+	font-size: 1rem;
+	font-weight: bold;
+	text-align: center;
 
+	user-select: none;
+
+	box-shadow: rgba(0, 0, 0, 1) 0px 0 18px 6px;
+	z-index: 100;
+
+	animation: blink-border 4s ease-in-out infinite;
+}
 
 @keyframes blink-border
 {
@@ -143,85 +161,19 @@ textarea
 }
 
 
-.main-holder
-{
-	padding: 0.5rem;
-	margin: 1rem auto;
-}
-
-
-.year
+canvas
 {
 	display: block;
-	padding: 0.5rem;
-	margin: 0.5rem auto;
-	width: calc((100vw - 70rem) * 0.5);
-	min-width: 15rem;
-	text-align: center;
-	border-bottom: 2px solid var(--border);
-	border-top: 2px solid var(--border);
+	border: 1px solid var(--border);
+	margin: 1rem auto;
+	background-color: transparent;
 
-	font-weight: bold;
-	font-size: 2rem;
+	width: 512px;
+	height: auto;
 
-	color: var(--white);
+	image-rendering: pixelated;
 }
 
-
-.link 
-{
-    display: flex;
-    justify-content: space-between;
-
-    width: calc(100vw - 70rem);
-    min-width: 30rem;
-
-    margin: 0.1rem auto;
-    padding: 0.3rem;
-
-    color: var(--g);
-	text-decoration: none;
-    background-color: var(--black);
-    border: 0.5px dashed transparent;
-}
-
-
-.link:hover
-{
-    border: 0.5px dashed var(--g) ;
-	background-color: var(--hover);
-}
-
-.link-inactive
-{
-	color: var(--inactive);
-}
-
-.link-inactive:hover
-{
-	border: 0.5px dashed var(--r) ;
-	background-color: var(--hover);
-}
-
-
-.time 
-{
-/*	color: var(--g);*/
-	font-weight: bold;
-    width: 5ch; /* Width to fit up to 5 characters, upto 20000, else optimization must be done. */
-    text-align: left; /* Left align the numbers */
-}
-
-.desc 
-{
-	color: var(--g);
-	font-weight: bold;
-    flex-grow: 1;
-    text-align: right; /* Right align the description */
-}
-
-.desc-inactive
-{ color: var(--inactive); }
 
 
 .hide { display: none !imp; }

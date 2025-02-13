@@ -46,7 +46,6 @@ function Logic()
 	U.save_code(log_B(B, start, end), /[SE#]/);
 }
 
-
 function pathfind(B, start, end)
 {
 	let w = B[0].length;
@@ -99,7 +98,7 @@ function pathfind(B, start, end)
 		}
 
 		// neighbour >> 
-		for(let dir of v2.DIRS)
+		for(let dir of v2.DIR)
 		{
 			let [X, Y] = v2.add(node.pos, dir);
 			if(X >= 0 && X < w && Y >= 0 && Y < h)
@@ -110,8 +109,6 @@ function pathfind(B, start, end)
 
 	return -1;
 }
-
-
 
 function log_B(B, start, end)
 {
@@ -138,8 +135,6 @@ function log_B(B, start, end)
 
 	return str;
 }
-
-
 
 let COORD = [];
 

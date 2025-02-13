@@ -1,0 +1,8 @@
+{
+  "name": "advent-util",
+  "version": "1.0.5",
+  "main": "util/util--npm.js",
+  "license": "MIT",
+  "keywords": ["advent", "2024", "util"],
+  "description": "javaScript utility functions for quick flow"
+}

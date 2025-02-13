@@ -50,7 +50,7 @@ function Logic()
 		for(let char of code)
 		{
 			// recursive
-			count += recursive(prev + char, level = 0, NUM_PAD);
+			count += recursive(prev + char, level = 0, NUM_PAD); // NUM_PAD only at level = 0
 			prev = char;
 		}
 		// << += count recived from accumulate approach
@@ -77,25 +77,25 @@ ANALYSIS:
 
 // DOC_COUNT, accumulate for each level approach
 let DOC_COUNT = [];
-function recursive(from_to, level, PAD)
+function recursive(from_to, level, PAD = DIR_PAD)
 {
-	// human
+	// human-level
 	if(level == DOC_COUNT.length - 1)
 	{
 		DOC_COUNT[level].set(from_to, 1);
 		return 1n; // just press the key
 	}
 
-	// exist
+	// already exist
 	let doc_count = DOC_COUNT[level];
 	if(doc_count.has(from_to))
 		return doc_count.get(from_to);
 
 
-	// non empty possible ways
+	// all non empty possible ways
 	let WAY = NE_WAY(from_to[0] , from_to[1] , PAD);
 
-	// accumulate appraoch >>
+	// accumulate approach >>
 	let COUNT = [];
 
 	for(let way of WAY)

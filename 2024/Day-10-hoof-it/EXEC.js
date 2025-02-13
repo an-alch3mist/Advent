@@ -47,7 +47,7 @@ function recursive(curr, B, head)
 		}
 
 	// dir
-	for(let dir of v2.DIRS)
+	for(let dir of v2.DIR)
 	{
 		let [x, y] = v2.add(curr, dir);
 		// in-range

@@ -4,12 +4,12 @@ function _A()
 	U.save_code(IN, /[X]/);
 
 				//   E 			NE 			N 			NW 		  W 		 SW 		S 		 	SE
-	v2.DIRS = [ [+1 ,  0], [+1 , +1], [ 0 , +1], [-1 , +1], [-1 ,  0], [-1 , -1], [ 0 , -1], [+1 , -1], ];
+	v2.DIR = [ [+1 ,  0], [+1 , +1], [ 0 , +1], [-1 , +1], [-1 ,  0], [-1 , -1], [ 0 , -1], [+1 , -1], ];
 	
 	for(let y = 0 ; y < h; y += 1)
 	for(let x = 0 ; x < w; x += 1)
 		if(B.GT([x, y]) == word[0])
-			v2.DIRS.forEach(dir => {
+			v2.DIR.forEach(dir => {
 				recursive(U.clone(word[0]) , pos= [x, y] , dir= dir)
 			});
 

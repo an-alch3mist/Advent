@@ -45,7 +45,7 @@ function exec_gaurd_walk(B, start, start_dir, obs = [])
 
 	while(true)
 	{
-		let next = v2.add(curr , v2.DIRS[dir]);
+		let next = v2.add(curr , v2.DIR[dir]);
 		let [x, y] = next;
 
 		// out of bounds

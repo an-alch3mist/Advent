@@ -1,6 +1,6 @@
 /*
 	start: 00:53
-	found: 
+	found: 01:52
 */
 
 function _A()
@@ -17,14 +17,14 @@ function _A()
 	// console.log(CC);
 }
 
-// 2.17sec
+// 1700ms
 function Logic()
 {
 	let DOC = pathfind(B, start, end);
-	console.log("DOC: ", DOC);
+	console.log("%cDOC", U.css.h() , DOC);
 
 	let DC_NODE = Disable_Collision(DOC, dc_radius = 20);
-	console.log("DC_NODE: ", DC_NODE);
+	console.log("%cDC_NODE", U.css.h() , DC_NODE);
 	let min_save = 100;
 
 	// just to log >>
@@ -44,7 +44,6 @@ function Logic()
 		if(dc_node.saved_dist >= min_save)
 			sum += 1;
 
-	//
 	console.log(`sum(dc_node with .saved_dist >= min_save): ${sum}`);
 	U.save_return("Day-12 part-2", sum);
 }
@@ -94,7 +93,12 @@ function pathfind(B, start, end)
 		// << BLUE
 
 		// NEIGHBOUR
-		for(let dir of v2.DIRS)
+		/* TODO => 
+		 for(let neighbour of get_NW_NEIGHBOUR(node, B))
+			RED.push(neighbour)
+		<= TODO
+		*/
+		for(let dir of v2.DIR)
 		{
 			let [X, Y] = v2.add(node.pos, dir);
 			if(X >= 0 && X < w && Y >= 0 && Y < h)
@@ -149,8 +153,7 @@ function Disable_Collision(DOC, dc_radius = 0)
 			continue;
 
 		// BLUE >>
-
-		if(BLUE_explored.GT(node.pos) == 1)
+		if(BLUE_explored.GT(node.pos) == 1) // >> optimize
 		{
 			let blue_index = BLUE.findIndex(blue => {
 				return v2.eql(blue.pos, node.pos);
@@ -164,13 +167,14 @@ function Disable_Collision(DOC, dc_radius = 0)
 		}
 		
 		// explore node >>
+
+		// Disable Collision on Concentric Circle COORD >>
 		let CC = get_NW_CON_CCOORD(B, pos = node.pos, max_radius = dc_radius);
-		// console.log(CC, node.pos);
 		for(let cc of CC)
 		{
-			if(BLUE_explored.GT(cc.coord) == 1) // .saved_dist shall be -ve
+			if(BLUE_explored.GT(cc.coord) == 1) // .saved_dist shall be -ve // >> optimize
 				continue;
-
+			
 			let dc_node = 
 			{
 				start_dc: node.pos,
@@ -189,13 +193,14 @@ function Disable_Collision(DOC, dc_radius = 0)
 			}
 			DC_NODE.push(dc_node);
 		}
+		// << Disable Collision on Concentric Circle COORD
 
 		BLUE.push(node);
 		BLUE_explored.ST(node.pos, 1);
 		// << BLUE
 
 		// NEIGHBOUR
-		for(let dir of v2.DIRS)
+		for(let dir of v2.DIR)
 		{
 			let [X, Y] = v2.add(node.pos, dir);
 			if(X >= 0 && X < w && Y >= 0 && Y < h)
@@ -217,7 +222,7 @@ let get_NW_CON_CCOORD = function(B, pos, max_radius)
 	let get_dist = ([x, y]) => Math.abs(x) + Math.abs(y);
 
 	// INITIALIZE LUT
-	if(CC_LUT.length == 0)	//  B
+	if(CC_LUT.length == 0)// >> optimize
 	{
 		for(let r = max_radius; r >= 0; r -= 1)
 		for(let y = -r; y <= +r; y += 1) 
@@ -243,7 +248,6 @@ let get_NW_CON_CCOORD = function(B, pos, max_radius)
 	}
 	return CC;
 }
-
 
 let B;
 let start; let end;

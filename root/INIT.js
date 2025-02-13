@@ -1,79 +1,100 @@
-function _A()
+function INIT(year)
 {
-	let href = (elem, val) => elem.setAttribute("href", val);
-	let main_holder = query(".holder");
+	let FILE = LOC.find(loc => loc.val == year).FILE;
+	if(FILE == null)
+		return;
 
+	console.log(FILE);
+	/* 
+	<div> .main-holder
+		<div> .year heading
 
-	console.log("Advent", LOC);
-	for(let year of LOC.YEAR)
+		<a> .link
+			<span> .compute-time
+			<span> .description of puzzle
+	*/
+
+	let main_holder_div = query(".main-holder");
+
+	create("div", "year").str(year).parent(main_holder_div);
+
+	for(let file of FILE)
 	{
-		if(year.FILES.length == 0)
-			continue;
+		// link
+		let href = `./Day-${file.day}-${file.desc}/index-${file.desc}.html`;
+		if(file.day == '#')
+			href = `./Day-%23-/index-somthng.html`;
 
-		// year-holder
-		let year_holder = elem("div", "year-holder", '');
-		year_holder.appendChild(
-			elem("div", "year", year.val)
-		);
+		let link_a = create("a", "link")
+						.set("href", href)
+						.parent(main_holder_div);
 
-		// links
-		for(let file of year.FILES)
-		{
-	    	// a
-			let a = elem('a', "link", "");
+		// compute-time
+		let time_span = create("span", "time")
+							.str(file.time)
+							.parent(link_a);
 
-		    if(file.day == '#')
-		    	href(a, `./${year.val}/Day-%23-/index-somthng.html`)
-		    else
-		    	href(a, `./${year.val}/Day-${file.day}-${file.desc}/index-${file.desc}.html`)
-			
-			// time
-			let timeSpan = elem("span", "time", file.time);
+		// description
+		let desc_span = create("span", "desc")
+							.str(`<l>${file.desc.replace(/\-/g, ' ')}</l> ${file.day}`)
+							.parent(link_a);
 
+		// inactive
+	    if(/\s*\./.test(file.time) == true)
+	    {
+	    	// link a
+			link_a
+				.set("target", "_self")
+				.set("href", `#`)
+				.set("class-l", "link-inactive");
+	    	
 	    	// desc
-			let descSpan = elem("span", "desc", `<l>${file.desc.replace(/\-/g, ' ')}</l> ${file.day}` );
+	    	desc_span
+		    	.str(`${file.day}`)
+		    	.set("class-l", "desc-inactive");
+	    }
+	    else
+	    	link_a.set("target", "_blank");
 
-			// inactive
-		    if(/\s*\./.test(file.time) == true)
-		    {
-		    	// a
-				a.setAttribute("target", "_self");
-			    a.classList.add("link-inactive");
-			    a.setAttribute("href", `#`);
-		    	
-		    	// desc
-		    	descSpan.innerHTML = `${file.day}`;
-			   	descSpan.classList.add("desc-inactive");
-		    }
-		    else
-		    {
-		    	a.setAttribute("target", "_blank");
-		    }
-
-		    a.appendChild(timeSpan);
-		    a.appendChild(descSpan);
-		    year_holder.appendChild(a);
-
-		}
-	    main_holder.appendChild(year_holder);
 	}
+	// main_holder_div.set("data", 0);
 }
 
 
-function elem(tag, _class, str)
+let create = (_tag, _class) => 
 {
-	let elem = document.createElement(tag);
-	elem.innerHTML = str;
-	elem.setAttribute("class", _class)
-	return elem;
+	let element = document.createElement(_tag);
+	element.setAttribute("class", _class);
+	return element;
 }
 
 
+// any attribute, for classList.add(str) => attr: "class-l", class: str
+HTMLElement.prototype.set = function(attr, str)
+{
+	if(attr == "class-l")
+		this.classList.add(str);
+	else
+		this.setAttribute(attr, str);
+	return this;
+}
+
+HTMLElement.prototype.parent = function(parent)
+{
+	parent.appendChild(this);
+	return this;
+}
+
+HTMLElement.prototype.str = function(str)
+{
+	this.innerHTML = str;
+	return this;
+}
 
 function query(str)
 {
 	return document.querySelector(str);
 }
 
-document.title = "Advent";
-_A();
+
+// call INIT(year = 2024)

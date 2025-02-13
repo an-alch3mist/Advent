@@ -65,9 +65,9 @@ function pathfind(B , start , end)
 		}
 
 		// neighbours
-		for(let i0 = 0 ; i0 < v2.DIRS.length; i0 += 1)
+		for(let i0 = 0 ; i0 < v2.DIR.length; i0 += 1)
 		{
-			let [X, Y] = v2.add(node.pos , v2.DIRS[i0]);
+			let [X, Y] = v2.add(node.pos , v2.DIR[i0]);
 
 			if( X >= 0 && X < w && Y >= 0 && Y < h )
 				RED.push({pos: [X, Y] , dist: node.dist + 1, ansc: node});

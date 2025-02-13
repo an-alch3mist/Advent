@@ -1,0 +1,266 @@
+
+	x00, y00, z00:
+		x00 	....xn
+		y00 	....yn
+		z00 	....xn_xor_yn
+		z00 	....zn
+		jfs 	....xn_and_yn
+		none 	....carry_n_prev
+		none 	....carry_n_prev_and_xn_xor_yn
+		none 	....carry_n
+
+	x45, y45, z45: 
+		x45 	....xn
+		y45 	....yn
+		none 	....xn_xor_yn
+		z45 	....zn
+		none 	....xn_and_yn
+		none 	....carry_n_prev
+		none 	....carry_n_prev_and_xn_xor_yn
+		none 	....carry_n
+
+//swapped wire(anu terminal) 
+/*
+	a normal ADDER:
+	x01, y01, z01: 
+		x01 	....xn
+		y01 	....yn
+		wsb 	....xn_xor_yn
+		z01 	....zn
+		vqv 	....xn_and_yn
+		jfs 	....carry_n_prev
+		dqt 	....carry_n_prev_and_xn_xor_yn
+		rqf 	....carry_n
+*/
+
+
+/*
+in: z09
+*/
+
+// four pairs of gates whose output wires have been swapped
+
+
+/*
+x00, y00, z00: 
+	x00 	....xn
+	y00 	....yn
+	z00 	....xn_xor_yn
+	none 	....zn
+	jfs 	....xn_and_yn
+	none 	....carry_n_prev
+	none 	....carry_n_prev_and_xn_xor_yn
+	none 	....carry_n
+x01, y01, z01: 
+x02, y02, z02: 
+x03, y03, z03: 
+x04, y04, z04: 
+x05, y05, z05: 
+x06, y06, z06: 
+x07, y07, z07: 
+x08, y08, z08: 
+x09, y09, z09: 
+	x09 	....xn
+	y09 	....yn
+	bbp 	....xn_xor_yn
+	hnd 	....zn
+	rbr 	....xn_and_yn
+	wwg 	....carry_n_prev
+	z09 	....carry_n_prev_and_xn_xor_yn
+	none 	....carry_n
+	********************************* hnd, z09
+	
+	step 0: if there is none in the complete_ADDER obtained from forward rhs for all exept lhs for carry_n_prev
+	step 1: find the 2 AND gates, 2 XOR gates, 1 OR gate involved
+	step 2: figure out what swap shall make it normal ?
+	
+	> wwg (confirm) cause no issue in x08, y08 level
+	> x09 (confirm)
+	> y09 (confirm)
+
+	y09 XOR x09 -> bbp
+	y09 AND x09 -> rbr
+	bbp AND wwg -> z09  .... since hnd OR rbr -> kmf, where rbr = xn AND yn
+	wwg XOR bbp -> hnd	.... this gotta be z09 since wwg is confirmed and bbp is confirmed
+	rbr OR hnd -> kmf
+
+x10, y10, z10: 
+x11, y11, z11: 
+x12, y12, z12: 
+x13, y13, z13: 
+x14, y14, z14: 
+x15, y15, z15: 
+x16, y16, z16: 
+x17, y17, z17: 
+x18, y18, z18: 
+x19, y19, z19: 
+x20, y20, z20: 
+x21, y21, z21: 
+x22, y22, z22: 
+x23, y23, z23: 
+	x23 	....xn
+	y23 	....yn
+	mfr 	....xn_xor_yn
+	bks 	....zn
+	z23 	....xn_and_yn
+	scw 	....carry_n_prev
+	qhm 	....carry_n_prev_and_xn_xor_yn
+	none 	....carry_n
+	********************************* bks, z23
+	> scw (confirm) cause no issue in x22, y32 level
+	x23	(confirm)
+	y23 (confirm)
+
+	1 (output swap) to make it normal ? 
+	y23 XOR x23 -> mfr
+	mfr XOR scw -> bks	.... should be z23, because scw is confirmed and ,fr is xn XOR yn is confirmed
+	x23 AND y23 -> z23  .... should be bks
+	scw AND mfr -> qhm
+	qhm OR bks -> dch
+
+x24, y24, z24: 
+	dch .... carry_n_pre
+
+x25, y25, z25: 
+x26, y26, z26: 
+x27, y27, z27: 
+x28, y28, z28: 
+x29, y29, z29: 
+x30, y30, z30: 
+x31, y31, z31: 
+x32, y32, z32: 
+x33, y33, z33: 
+x34, y34, z34: 
+x35, y35, z35: 
+	rdh 	.... carry_n
+
+x36, y36, z36: 
+
+	# since none in carry_n_prev of x37, y37, z37 level
+	step 0: if there is none in the complete_ADDER obtained from forward rhs for all exept lhs for carry_n_prev
+	step 1: find the 2 AND gates, 2 XOR gates, 1 OR gate involved
+	step 2: figure out what swap shall make it normal ?
+	
+	x36 XOR y36 -> wvp	....correct
+	wvp XOR rdh -> z36	....correct
+	x36 AND y36 -> mdk	....correct
+	rdh AND wvp -> cbd	....correct
+	mdk OR cbd -> ghr	....correct
+	
+
+
+
+x37, y37, z37: 
+	x37 	....xn
+	y37 	....yn
+	nrn 	....xn_xor_yn
+	none 	....zn
+	tjp 	....xn_and_yn
+	none 	....carry_n_prev
+	none 	....carry_n_prev_and_xn_xor_yn
+	none 	....carry_n
+	**** swapped output wires?
+	
+	step 0: if there is none in the complete_ADDER obtained from forward rhs for all exept lhs for carry_n_prev
+	step 1: find the 2 AND gates, 2 XOR gates, 1 OR gate involved
+	step 2: figure out what swap shall make it normal ?
+
+	-> ghr (confirm) cause no issue in x26, y36 level
+	x37	(confirm)
+	y37 (confirm)
+
+	2 (output swap) to make it normal ? here are all 5 gates equation involved
+		tjp AND ghr -> kpb		.... swap-1
+		kpb OR nrn -> ggh		.... swap-1
+		ghr XOR tjp -> z37 		
+		xn_and_yn -> tjp		.... swap-0 (got to either nrn or kpb)
+		xn_xor_yn -> nrn 		.... swap-0 (it got to be tjp) because ghr(carry_prev is confirmed) and tjp and ghr are involved in XOR which leads to zn
+	
+	corrected version:
+		tjp AND ghr -> kpb
+		kpb OR nrn -> ggh
+		ghr XOR tjp -> z37
+		xn_and_yn -> nrn	
+		xn_xor_yn -> tjp 
+
+x38, y38, z38: 
+	ggh ....carry_prev
+	
+x39, y39, z39: 
+x40, y40, z40: 
+x41, y41, z41: 
+x42, y42, z42: 
+x43, y43, z43: 
+x44, y44, z44: 
+x45, y45, z45: 
+	x45 	....xn
+	y45 	....yn
+	none 	....xn_xor_yn
+	none 	....zn
+	none 	....xn_and_yn
+	none 	....carry_n_prev
+	none 	....carry_n_prev_and_xn_xor_yn
+	none 	....carry_n
+
+
+after 3 swaps
+
+	x 	 : 25491299606221n
+	y 	 : 27561610995737n
+	x + y: 53052910601958n
+	
+	just sum(from z wire): 53190349489894
+
+
+even after all 3 swaps
+@ z37:
+x37 	....xn
+y37 	....yn
+nrn 	....xn_xor_yn
+none 	....xn_xor_yn_back
+none 	....zn
+tjp 	....xn_and_yn
+none 	....xn_and_yn_back
+none 	....carry_n_prev
+none 	....carry_n_prev_and_xn_xor_yn
+none 	....carry_n_prev_and_xn_xor_yn_back
+none 	....carry_n	
+
+
+25491299606221n
+27561610995737n
+53052910601958n
+sum(from z wire): 53052910536422
+
+ 10111001011110010011111011011 1001111011001101
+ 11001000100010011000000001000 0110100000011001
+110000010000000101011111100011 0000011011100110
+
+
+@z16
+
+x16, y16, z16: 
+x16 	....xn
+y16 	....yn
+mqf 	....xn_xor_yn
+mqf 	....xn_xor_yn_back
+tdv 	....zn
+pwk 	....xn_and_yn
+pwk 	....xn_and_yn_back
+jkw 	....carry_n_prev
+ncj 	....carry_n_prev_and_xn_xor_yn
+ncj 	....carry_n_prev_and_xn_xor_yn_back
+z16 	....carry_n
+
+zn should be z16
+
+
+after correction:
+sum_x: 			25491299606221n
+sum_y: 			27561610995737n
+sum_x + sum_y: 	53052910601958n
+
+sum(from z wire): 53052910601958
+ 101110010111100100111110110111001111011001101
+ 110010001000100110000000010000110100000011001
+1100000100000001010111111001000000011011100110

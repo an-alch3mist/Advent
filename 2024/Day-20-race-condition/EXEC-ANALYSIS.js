@@ -112,7 +112,7 @@ function pathfind(B, start, end)
 		// << BLUE
 
 		// NEIGHBOUR
-		for(let dir of v2.DIRS)
+		for(let dir of v2.DIR)
 		{
 			let [X, Y] = v2.add(node.pos, dir);
 			if(X >= 0 && X < w && Y >= 0 && Y < h)
@@ -234,7 +234,7 @@ function DC_pathfind(B, start, end, DIST_DOC, dc_radius = 0)
 		// << BLUE
 
 		// NEIGHBOUR
-		for(let dir of v2.DIRS)
+		for(let dir of v2.DIR)
 		{
 			let [X, Y] = v2.add(node.pos, dir);
 			if(X >= 0 && X < w && Y >= 0 && Y < h)

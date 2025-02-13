@@ -95,8 +95,8 @@ function Logic()
 
 	// [sort] a: next, b: curr, return a.localeCompare(b);
 	crossed_wires.sort((a, b) => a.localeCompare(b));
-	console.log(`crossed_wires: ${crossed_wires.join(',')}`);
-	U.save_return("Day-24 after correction part-2", sum);
+	console.log(`crossed_wires: %c${crossed_wires.join(',')}`, U.css.h2g());
+	U.save_return("Day-24 part-2", crossed_wires.join(','));
 }
 /*
 	Because gates wait for input, some wires need to 
@@ -135,13 +135,34 @@ function propagate(LOGIC_GATE)
 
 
 
+// TODO in future
+// get all gate equations(2_XOR, 2_AND, 1_OR) involved at level (n)
+
+
+
+
+// is added complete? approach
+// the output wires are swapped from equaltions => 
+// left end of wire is pulled out and swapped to another 
+// left end wire gate output
 function a_complete_ADDER(x_id, y_id, z_id, LOGIC_GATE)
 {
+
 	let get_rhs = (a, b, oper) =>
 	{
 		for(let gate of LOGIC_GATE)
 			if(gate.oper == oper)
 			if((gate.a.id == a && gate.b.id == b)||(gate.b.id == a && gate.a.id == b))
+				return gate.c.id;
+
+		return "none";
+	}
+
+	let get_rhs_1 = (a, oper) =>
+	{
+		for(let gate of LOGIC_GATE)
+			if(gate.oper == oper)
+			if(gate.a.id == a || gate.b.id == a)
 				return gate.c.id;
 
 		return "none";
@@ -162,60 +183,86 @@ function a_complete_ADDER(x_id, y_id, z_id, LOGIC_GATE)
 	// checked >>
 	// console.log(get_rhs("x40", "y40", "AND"));
 	// console.log(get_lhs("y40", "AND"));
+	let id = parseInt(x_id.substring(1, x_id.length));
+	let id_prev = (id - 1).toString().padStart(2, '0');
 
-	let id_curr = x_id.substring(1, 3);
-	let id_prev = (parseInt(id_curr) - 1).toString().padStart(2, '0');
-	// console.log(id_curr , id_prev) // checked
-
-
+	// forward
 	let xn = x_id;
 	let yn = y_id;
 	
 	let xn_xor_yn = get_rhs(x_id, y_id, "XOR");
 	let xn_and_yn = get_rhs(x_id, y_id, "AND");
 
+	// back
 	let carry_n_prev = get_lhs(xn_xor_yn, "XOR");
 	let zn = get_rhs(xn_xor_yn, carry_n_prev, "XOR");
+
 	let carry_n_prev_and_xn_xor_yn = get_rhs(carry_n_prev, xn_xor_yn, "AND"); 
 	let carry_n = get_rhs(carry_n_prev_and_xn_xor_yn, xn_and_yn, "OR");
-	
+
+
+	// backward
 	let xn_xor_yn_back = get_lhs(carry_n_prev , "AND");
 	let xn_and_yn_back = get_lhs(carry_n_prev_and_xn_xor_yn , "OR");
 	let carry_n_prev_and_xn_xor_yn_back = get_lhs(xn_and_yn, "OR"); 
-
-
-	/*
-	at z16 zn back ward check failed
-	since carry_n is'nt checked back from next z17 
 	
-	*/
-
-/*if(
-	xn_xor_yn == "none" ||
-	xn_xor_yn_back != xn_xor_yn ||
-	zn == "none" ||
-	xn_and_yn == "none" ||
-	xn_and_yn_back != xn_and_yn ||
-
-	carry_n_prev == "none" ||
-	carry_n_prev_and_xn_xor_yn == "none" ||
-	carry_n_prev_and_xn_xor_yn_back != carry_n_prev_and_xn_xor_yn ||
-	carry_n == "none"
-)*/
+	let xn_and_yn_prev_id = get_rhs('x' + id_prev, 'y' + id_prev, "AND");
+	let carry_n_prev_front = get_rhs_1(xn_and_yn_prev_id, "OR");
+	let zn_back = z_id;
 
 
-console.log(
-`${xn} \t....xn
-${yn} \t....yn
-${xn_xor_yn} \t....xn_xor_yn
-${xn_xor_yn_back} \t....xn_xor_yn_back
-${zn} \t....zn
-${xn_and_yn} \t....xn_and_yn
-${xn_and_yn_back} \t....xn_and_yn_back
-${carry_n_prev} \t....carry_n_prev
-${carry_n_prev_and_xn_xor_yn} \t....carry_n_prev_and_xn_xor_yn
-${carry_n_prev_and_xn_xor_yn_back} \t....carry_n_prev_and_xn_xor_yn_back
-${carry_n} \t....carry_n`);
+	let FORWRAD = 
+	[
+		x_id,	// terminal a
+		y_id,   // terminal a
+		xn_xor_yn,
+		xn_and_yn,
+		carry_n_prev_front,
+		zn,		// terminal b
+		carry_n_prev_and_xn_xor_yn,
+		carry_n,
+	];
+
+	let BACKWARD = 
+	[
+		x_id,	// terminal a
+		y_id,	// terminal a
+		xn_xor_yn_back,
+		xn_and_yn_back,
+		carry_n_prev,
+		zn_back,	// terminal b
+		carry_n_prev_and_xn_xor_yn_back,
+		carry_n,
+	];
+
+	let STR = 
+	[
+		["xn", "xn"],
+		["yn", "yn"],
+		["xn_xor_yn_front", "_back"],
+		["xn_and_yn_front", "_back"],
+		["carry_n_prev_front", "_back"],
+		["zn_front", "zn_back"],
+		["carry_n_prev_and_xn_xor_yn_front", "_back"],
+		["carry_n", "carry_n"],
+	];
+
+
+	for(let i0 = 0; i0 < FORWRAD.length; i0 += 1)
+		if(FORWRAD[i0] != BACKWARD[i0] || FORWRAD[i0] == "none" || BACKWARD[i0] == "none")
+		{
+			let str = "";
+			for(let i0 = 0; i0 < FORWRAD.length; i0 += 1)
+			{
+				str += `${FORWRAD[i0]}, ${BACKWARD[i0]}\t\t....${STR[i0][0] + "---" + STR[i0][1]}\n`;
+			}
+			console.log(str);
+			break;
+		}
+
+	// # After this swap the output to resolve gates
+	// # keep doing that one by one until no more gates are logged
+
 }
 
 
