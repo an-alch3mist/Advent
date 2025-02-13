@@ -65,7 +65,7 @@ function pathfind(B , start , end)
 		BLUE.push(node);
 
 		// neighbour
-		v2.DIRS.forEach( dir => {
+		v2.DIR.forEach( dir => {
 			let [X, Y] = v2.add(node.pos , dir);
 			if( X >= 0 && X < w && Y >= 0 && Y < h)
 				RED.push({ pos: [X, Y], dist: node.dist + 1 });
@@ -266,7 +266,7 @@ let v2 =
 	eql 	: function(a, b) { return (a[0] == b[0]) && (a[1] == b[1]); },
 	none: [-(10**6), -(10**6)],
 
-	DIRS: [[+1, 0], [0, +1], [-1, 0], [0, -1]],
+	DIR: [[+1, 0], [0, +1], [-1, 0], [0, -1]],
 	DIR_CHARS: ">v<^",
 	CHAR_to_DIR: new Map(
 	[
@@ -337,7 +337,7 @@ let U =
 			 color: ${color};
 			 padding: 1px;`,
 
-		h2r: (shadow = true, color = "#f5afaf", bg = "#3a0303") => 
+		h2r: (shadow = false, color = "#f5afaf", bg = "#3a0303") => 
 			`font-size: 12px; 
 			 background-color:${bg}; 
 			 ${(shadow)? `text-shadow: 0 0 3px #f1f1f1`: ' '};
@@ -438,7 +438,7 @@ let ITER =
 	},
 
 	iter: 0,
-	inc : (max = 10**2) => 
+	iter_inc : (max = 10**2) => 
 	{ 
 		ITER.iter += 1; 
 		if(ITER.iter > max) 

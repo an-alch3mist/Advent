@@ -18,7 +18,7 @@ function _A()
 	pattern_matching( pattern , "do do Don't#somev2(1,2)..a.V2(1 124)" );
 
 
-	console.log(v2.DIRS);
+	console.log(v2.DIR);
 	console.log(v2);
 	console.log(U);
 
