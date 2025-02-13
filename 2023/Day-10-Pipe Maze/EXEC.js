@@ -8,7 +8,6 @@
 				=> get_BEST_PATH even with backtracking, seq.push() is going max_stack 
 				   for a 6800 path size
 				
-
 				# flood fill id: (tile that is not part of main loop)
 					# region which is surrounded by pipe outline are considered as enclosed region
 				=> # flood-fill region will work only over tile based
@@ -29,48 +28,234 @@
 					or 
 					# can slip to out-bound region
 */
+
+// recursive depth limit 1 << 12
+
 function _A()
 {
-	U.save_code(IN , /[SE]/);
+	U.save_code(IN, /[SE\-\|]/);
 	Gather();
-	console.log("%cB:", U.css.h() , B, start, end, w, h);
+	console.log("%cB:", U.css.h(), B, start, end, w, h);
 
 	Logic();
-	// check >>
-	console.log(U.get_gcd(VAL = [4, 6, 24]));
-	// << check
-	// sum>>
-
-	// << sum
 }
 
-
+// >> 1400 ms
 function Logic()
 {
-	let NEIGHBOUR = get_NW_NEIGHBOUR([1, 4], B);
-	let DOC = pathfind(B, start, end);
+	// pathfind >>
+	// DOC => { BLUE: , end_node: blue node with >= 2 ANSC  }
+	let DOC = pathfind(B, start);
+	console.log("%cDOC:", U.css.h(), DOC);
 
-	console.log("%cDOC:", U.css.h(), DOC );
-	console.log(`end_node with max_dist: %c${DOC.END_NODE[0].dist}`, U.css.h2g());
-	
+	let MAIN_PIPE = B.map(row => row.map(() => 0));
+	for(let blue of DOC.BLUE)
+		MAIN_PIPE.ST(blue.pos, 1);
+	console.log(MAIN_PIPE);
+	// << pathfind
 
-	log_B(B, DOC.BLUE);
-	let REGION = flood_fill(B, DOC.BLUE);
+
+
+
+
+
+	// 0. convert to GRID
+	let GRID_B = get_GRID_SPACE(B, DOC.BLUE);
+
+	// 1. a. compare a non pipe tile on B with flood_fill(GRID_B)
+	// 	  b. if it does'nt interact with out bounds.... thats the tile we looking for
+	let REGION = flood_fill_CHAR_GRID(GRID_B);
 	console.log("%cREGION:", U.css.h(), REGION);
 
-	let sum = 0;
+	let REGION_MAP = GRID_B.map(row => row.map(() => null));
 	for(let region of REGION)
-		if(region.out_bounds == false && region.id != 'O')
-			sum += region.POS.length;
+		for(let pos of region.POS)
+			REGION_MAP.ST(pos, region);
+	console.log("%cREGION_MAP:", U.css.h() ,REGION_MAP);
 
-	console.log(`sum of enclosed region.POS: %c${sum}`, U.css.h2g());
+	// 1. b. >>
+	// [get contact with outer bounds] from converted edge-maze-coord to grid-maze coord
+	let get_cwo_pipe = (pos, REGION_MAP) =>
+	{
+		let region = REGION_MAP.GT([ pos[0] * 3 + 1, pos[1] * 3 + 1 ]);
+		return region.contact_w_outer_bound;
+	};
+
+	// just to log >>
+		let STR = B.map(row => row.map(() => '_'));
+		for(let y = 0; y < h; y += 1)
+		for(let x = 0; x < w; x += 1)
+		{
+			if(MAIN_PIPE.GT([x, y]) == 1)
+			{
+				STR.ST([x, y], '+')
+				continue;
+			}	
+
+			let cwo_pipe = get_cwo_pipe([x, y], REGION_MAP);
+			STR.ST([x, y], (cwo_pipe == true)? 'o': 'I');
+		}
+		let str = "";
+		STR.forEach(row => str += row.join('') + '\n');
+		// console.log(str);
+	// << just to log
+
+	let sum = 0;
+	for(let y = 0; y < h; y += 1)
+	for(let x = 0; x < w; x += 1)
+		if(MAIN_PIPE.GT([x, y]) == 0)	// not in main pipe
+		if(get_cwo_pipe([x, y], REGION_MAP) == false) // region in contact with outer region
+			sum += 1;
+
+	console.log(`count(tile not in main-pipe that is in contact with outer bound): %c${sum}`, U.css.h2g());
+	U.save_return("Day-10 part-2", sum);
+	// << 1. b.
 }
 
 
+// TODO: Generalize flood_fill()
+function flood_fill_CHAR_GRID(B)
+{
+	let w = B[0].length; let h = B.length;
+
+	let EXPLORE = B.map(row => row.map(() => 0));
+	// console.log(EXPLORE);
+
+	let REGION = [];
+	for(let y = 0; y < h; y += 1)
+	for(let x = 0; x < w; x += 1)
+	{
+		if(EXPLORE.GT([x, y]) == 1)
+			continue;
+
+		// region
+		let region = 
+		{ 
+			POS: [], id: B.GT([x, y]), 
+			contact_w_outer_bound: false,
+		}; 
+		region.POS.push([x, y]);
+
+		while(true)
+		{
+			// all explored
+			let all_explored = true;
+
+			// pick an explored pos
+			for(let pos of region.POS)
+				for(let dir of v2.DIR)
+				{
+					let [X, Y] = v2.add(pos, dir);
+					if( X >= 0 && X < w && Y >= 0 && Y < h )
+					{
+						// not explored yet
+						if(EXPLORE.GT([X, Y]) == 0)
+							// same id
+							if(B.GT([X, Y]) == region.id)
+							{
+								// explore pos >>
+								EXPLORE.ST([X, Y], 1);
+								region.POS.push([X, Y]);
+								all_explored = false;
+								// << explore pos
+							}
+					}
+					else
+						region.contact_w_outer_bound = true;
+				}
+
+			// all explored exit
+			if(all_explored == true)
+				break;
+		}
+
+		REGION.push(region);
+	}
+	return REGION;
+}
+
+
+function get_GRID_SPACE(B, BLUE)
+{
+	// WFC TILE module approach
+	let TILE = new Map(
+	[
+	//	tile   rdlu => in txt space //
+		['|', "xoxo"],
+		['-', "oxox"],
+		['L', "oxxo"],
+		['J', "xxoo"],
+		['7', "xoox"],
+		['F', "ooxx"],
+		['.', "xxxx"],
+		['S', "oooo"],
+	]);
+
+	let w = B[0].length; let h = B.length;
+
+	let GRID_B = [];
+	let BLUE_2D = B.map(row => row.map(() => 0));
+	for(let blue of BLUE)
+		BLUE_2D.ST(blue.pos, 1);
+
+
+	for(let y = 0 ; y < 3 * h; y += 1)
+	{
+		GRID_B.push([]);
+		for(let x = 0; x < 3 * w; x += 1)
+			GRID_B[y].push('█');
+	}
+
+	// apply pipe connection as wall breaks >>
+	for(let y = 0; y < h; y += 1)
+	for(let x = 0; x < w; x += 1)
+	{
+		let curr = B.GT([x, y]);
+		if(curr == '.') // not a pipe, let that be '#'
+			continue;
+		if(BLUE_2D.GT([x, y]) == 0) // not in MAIN-PIPE, let that be '#'
+			continue;
+
+		// pipe char
+		GRID_B.ST([ x * 3 + 1, y * 3 + 1 ], curr);
+		// continue;
+
+		let CONN = TILE.get(curr);
+
+		for(let i0 = 0; i0 < v2.DIR.length; i0 += 1)
+		{
+			if(CONN[i0] == 'x')
+				continue;
+
+			let dir = v2.DIR[i0];
+			let [X, Y] = v2.add([ 3 * x + 1, 3 * y + 1], dir);
+			if(X >= 0 && X < 3 * w && Y >= 0 && Y < 3 * h)
+				// joint char
+				GRID_B.ST([ X, Y ], ' ');
+		}
+	}
+	// << apply pipe connection as wall breaks
+
+
+
+	let str = "";
+	GRID_B.forEach(row => str += row.join('') + '\n');
+	// U.save_code(str, /[SE\-\|]/);
+	console.log("%cGRID_B:", U.css.h() , GRID_B);
+	// console.log("%cGRID_B str:", U.css.h(), str);
+	U.save_code(str);
+
+	// return grid-coord from edge-coord
+	return GRID_B;
+}
+
+
+
+
+// 4:23, without get_NW_NEIGHBOUR
 function pathfind(B, start, end)
 {
-	let w = B[0].length;
-	let h = B[1].length;
+	// get_NW_NEIGHBOUR
 
 	let RED = [];
 	let BLUE = [];
@@ -82,15 +267,12 @@ function pathfind(B, start, end)
 		// all explored
 		if(RED.length == 0)
 		{
-			console.log("all-explored");
+			console.log("all explored");
 			break;
 		}
 
+		// node
 		let node = RED.minMax((a, b) => a.dist - b.dist, splice = true);
-
-		// block
-		if(B.GT(node.pos) == '.')
-			continue;
 
 		let blue_index = BLUE.findIndex(blue => {
 			return v2.eql(blue.pos, node.pos);
@@ -103,259 +285,97 @@ function pathfind(B, start, end)
 			if(blue.dist == node.dist)
 				for(let ansc of node.ANSC)
 					blue.ANSC.push(ansc);
-
 			continue;
 		}
 
 		// explore node >>
 		BLUE.push(node);
-
-		let NEIGHBOUR = get_NW_NEIGHBOUR(node.pos, B);
-		for(let neighbour of NEIGHBOUR)
-			RED.push({ pos: neighbour, dist: node.dist + 1, ANSC: [node] });
+		for(let neighbour of get_NW_NEIGHBOUR(node, B))
+			RED.push(neighbour)
 		// << explore node
 	}
 
-	let DOC = 
-	{ 
-		BLUE: BLUE,
-		END_NODE: [],
-	};
-
-	for(let blue of BLUE)
-		if(blue.ANSC.length > 1)
-			DOC.END_NODE.push(blue);
-
-	// [sort], a: next, b: curr, return a - b
-	DOC.END_NODE.sort((a, b) => { return -(a.dist - b.dist) });
-
+	let DOC = { BLUE: BLUE, end_node: BLUE.find(blue => blue.ANSC.length > 1) };
 	return DOC;
 }
 
-// exactly 2 neighbour
-function get_NW_NEIGHBOUR(pos, B)
+function get_NW_NEIGHBOUR(node, B)
 {
-	// . is no flow => wall
-	let char = B.GT(pos);
-	let w = B[0].length;
-	let h = B.length;
+	// WFC TILE module approach
+	let TILE = new Map(
+	[
+	//	tile   rdlu => in txt space //
+		['|', "xoxo"],
+		['-', "oxox"],
+		['L', "oxxo"],
+		['J', "xxoo"],
+		['7', "xoox"],
+		['F', "ooxx"],
+		['.', "xxxx"],
+		['S', "oooo"],
+	]);
+	// console.log(TILE);
+
+	let w = B[0].length; let h = B.length;
 
 	let NEIGHBOUR = [];
-
-	for(let dir_i = 0; dir_i < v2.DIR.length; dir_i += 1)
+	for(let i0 = 0; i0 < v2.DIR.length; i0 += 1)
 	{
-		let dir = v2.DIR[dir_i];
-		let [X, Y] = v2.add(pos, dir)
-		if(X >= 0 && X < w && Y >= 0 && Y < h)
+		let dir = v2.DIR[i0];
+		let [X, Y] = v2.add(node.pos, dir);
+		if( X >= 0 && X < w && Y >= 0 && Y < h)
 		{
-			let next = B.GT([X, Y]);
-			if(char == 'S')
-			{
-				if(dir_i == 0) if(next == 'J' || next == '-' || next == '7' || next == 'S') NEIGHBOUR.push([X, Y]);
-				if(dir_i == 1) if(next == 'J' || next == '|' || next == 'L' || next == 'S') NEIGHBOUR.push([X, Y]);
-				if(dir_i == 2) if(next == 'F' || next == '-' || next == 'L' || next == 'S') NEIGHBOUR.push([X, Y]);
-				if(dir_i == 3) if(next == 'F' || next == '|' || next == '7' || next == 'S') NEIGHBOUR.push([X, Y]);
-			}
-			if(char == '-')
-			{
-				if(dir_i == 0) if(next == 'J' || next == '-' || next == '7' || next == 'S') NEIGHBOUR.push([X, Y]);
-				// if(dir_i == 1) if(next == 'J' || next == '|' || next == 'L' || next == 'S') NEIGHBOUR.push([X, Y]);
-				if(dir_i == 2) if(next == 'F' || next == '-' || next == 'L' || next == 'S') NEIGHBOUR.push([X, Y]);
-				// if(dir_i == 3) if(next == 'F' || next == '|' || next == '7' || next == 'S') NEIGHBOUR.push([X, Y]);
-			}
-			if(char == '|')
-			{
-				// if(dir_i == 0) if(next == 'J' || next == '-' || next == '7' || next == 'S') NEIGHBOUR.push([X, Y]);
-				if(dir_i == 1) if(next == 'J' || next == '|' || next == 'L' || next == 'S') NEIGHBOUR.push([X, Y]);
-				// if(dir_i == 2) if(next == 'F' || next == '-' || next == 'L' || next == 'S') NEIGHBOUR.push([X, Y]);
-				if(dir_i == 3) if(next == 'F' || next == '|' || next == '7' || next == 'S') NEIGHBOUR.push([X, Y]);
-			}
-			if(char == 'L')
-			{
-				if(dir_i == 0) if(next == 'J' || next == '-' || next == '7' || next == 'S') NEIGHBOUR.push([X, Y]);
-				// if(dir_i == 1) if(next == 'J' || next == '|' || next == 'L' || next == 'S') NEIGHBOUR.push([X, Y]);
-				// if(dir_i == 2) if(next == 'F' || next == '-' || next == 'L' || next == 'S') NEIGHBOUR.push([X, Y]);
-				if(dir_i == 3) if(next == 'F' || next == '|' || next == '7' || next == 'S') NEIGHBOUR.push([X, Y]);
-			}
-			if(char == 'J')
-			{
-				// if(dir_i == 0) if(next == 'J' || next == '-' || next == '7' || next == 'S') NEIGHBOUR.push([X, Y]);
-				// if(dir_i == 1) if(next == 'J' || next == '|' || next == 'L' || next == 'S') NEIGHBOUR.push([X, Y]);
-				if(dir_i == 2) if(next == 'F' || next == '-' || next == 'L' || next == 'S') NEIGHBOUR.push([X, Y]);
-				if(dir_i == 3) if(next == 'F' || next == '|' || next == '7' || next == 'S') NEIGHBOUR.push([X, Y]);
-			}
-			if(char == 'F')
-			{
-				if(dir_i == 0) if(next == 'J' || next == '-' || next == '7' || next == 'S') NEIGHBOUR.push([X, Y]);
-				if(dir_i == 1) if(next == 'J' || next == '|' || next == 'L' || next == 'S') NEIGHBOUR.push([X, Y]);
-				// if(dir_i == 2) if(next == 'F' || next == '-' || next == 'L' || next == 'S') NEIGHBOUR.push([X, Y]);
-				// if(dir_i == 3) if(next == 'F' || next == '|' || next == '7' || next == 'S') NEIGHBOUR.push([X, Y]);
-			}
-			if(char == '7')
-			{
-				// if(dir_i == 0) if(next == 'J' || next == '-' || next == '7' || next == 'S') NEIGHBOUR.push([X, Y]);
-				if(dir_i == 1) if(next == 'J' || next == '|' || next == 'L' || next == 'S') NEIGHBOUR.push([X, Y]);
-				if(dir_i == 2) if(next == 'F' || next == '-' || next == 'L' || next == 'S') NEIGHBOUR.push([X, Y]);
-				// if(dir_i == 3) if(next == 'F' || next == '|' || next == '7' || next == 'S') NEIGHBOUR.push([X, Y]);
-			}
+			let curr = B.GT(node.pos);	// tile char
+			let next = B.GT([X, Y]);	// tile char
+
+			// do not consider 'x' => not allowed connector type
+			if(TILE.get(curr)[i0] == 'x')
+				continue;
+
+			// @dir curr <-> next, can connect ?
+			if(TILE.get(curr)[i0] == TILE.get(next)[(i0 + 2) % 4])
+				NEIGHBOUR.push({ pos: [X, Y], dist: node.dist + 1, ANSC: [node] , char: next}); // char => just to log
 		}
 	}
-
-	// console.log(NEIGHBOUR.map(_pos => _pos.join(',' || next == 'S')));
 	return NEIGHBOUR;
 }
 
-// not working for path size of 6800 even with back track
-function get_BEST_PATH(end_node)
-{
-	let BEST_PATH = [];
-
-	let seq_path = [];
-	function recursive(curr)
-	{
-		if(ITER.iter_inc(10**4))
-			return;
-
-		// 'S' node
-		if(curr.ANSC.length == 0)
-		{
-			let new_seq_path = U.clone(seq_path);
-			new_seq_path.push(curr.pos);
-			BEST_PATH.push(new_seq_path);
-		}
-
-		for(let ansc of curr.ANSC)
-		{
-			// backtrack approach >>
-			seq_path.push(curr.pos);
-			recursive(ansc)
-			seq_path.splice(seq_path.length - 1, 1);
-			// << backtrack approach
-		}
-	}
-
-	recursive(end_node);
-	return BEST_PATH;
-}
 
 
-
-
-// part-2 >>
-function flood_fill(old_B , BLUE)
-{
-	// B => . O >>
-	let B = old_B.map(row => {
-		return row.map(char => {
-			return '.';
-		});
-	});
-	for(let blue of BLUE)
-		B.ST(blue.pos, 'O'); // .: not part of main loop, O: part of main loop
-	// log_B(B, []);
-	// << B => . O
-
-	let w = B[0].length; h = B.length;
-	let EXPLORE = B.map(row => row.map(() => 0));
-
-	// REGION
-	let REGION = [];
-	//
-	for(let y = 0; y < h; y += 1)
-	for(let x = 0; x < w; x += 1)
-	{
-		if(EXPLORE.GT([x, y]) == 1)
-			continue;
-		// found a not explored tile
-
-		// region >>
-		let region = { id: B.GT([x, y]), POS: [], out_bounds: false };
-		region.POS.push([x, y]);
-		EXPLORE.ST([x, y], 1);
-
-		while(true)
-		{
-			// all explored
-			let all_explored = true;
-
-			// each pos
-			for(let pos of region.POS)
-				for(let dir of v2.DIR)
-				{
-					let [X, Y] = v2.add(pos, dir);
-					if(X >= 0 && X < w && Y >= 0 && Y < h)
-					{
-						// same type
-						if(B.GT([X, Y]) == region.id )
-							// not explored yet
-							if(EXPLORE.GT([X, Y]) == 0)
-							{
-								// explore and add to POS
-								region.POS.push([X, Y]);
-								EXPLORE.ST([X, Y], 1);
-								all_explored = false;
-							}
-					}
-					else
-						region.out_bounds = true;
-
-				}
-
-			if(all_explored == true)
-				break;
-		}
-
-		REGION.push(region);
-		// << region
-	}
-
-	// REGION
-	return REGION;
-}
-
-
-
-
-// << part-2
-
-
-
-
-function log_B(B, BLUE)
-{
-	let STR = B.map(row => row.map(char => char));
-
-	for(let blue of BLUE)
-		STR.ST(blue.pos, 'O');
-
-	STR.ST(start, 'S');
-
-	let str = "";
-	STR.forEach(row => str += row.join('') + '\n');
-	// console.log(str);
-	U.save_code(str, /[SEO]/);
-}
-
-
-let B = [];
+let B;
 let start; let end;
-let w; let height;
+let w; let h;
+
 function Gather()
 {
-	//// parse IN to STORE >> ////
-	B = IN.split('\n' || next == 'S').map((line, y) => {
+	// parse IN here >>
+	B = IN.split('\n').map((line, y) => {
 		return line.split('').map((char, x) => {
 			if(char == 'S') start = [x, y];
+			if(char == 'E') end = [x, y];
 
 			return char;
 		});
-	});
+	})
 
-	w = B[0].length;
-	h = B.length;
-
-	//// << parse IN to STORE ////
+	w = B[0].length; h = B.length;
+	// << parse IN here
 }
 
-// U.title("somthng");
+
+U.title("Pipe-Maze");
+U.zoom("20%");
 _A();
+
+/*
+
+
+
+
+
+
+
+
+
+
+*/

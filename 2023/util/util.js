@@ -198,6 +198,7 @@ let v2 =
 {
 	add 	: function(a, b) { return [ a[0] + b[0] , a[1] + b[1] ]; },
 	diff   	: function(a, b) { return [ a[0] - b[0] , a[1] - b[1] ]; },
+	mul 	: function(m, a) { return [    m * a[0] ,    m * a[1] ]; },
 	eql 	: function(a, b) { return (a[0] == b[0]) && (a[1] == b[1]); },
 	none: [-(10**6), -(10**6)],
 
@@ -283,7 +284,6 @@ let U =
 		let rand = parseInt(U.gnpr());
 		return (rand % (Max - min + 1)) + min;
 	},
-
 
 	// gcd, lcm
 	get_gcd: function(VAL)
