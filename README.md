@@ -39,6 +39,6 @@
 
 
 ```diff
-#   in ./index-desc.html <body>
-#   <script src="https://unpkg.com/advent-2024@latest/util/util.js"></script>
+#   include the following in ./index-desc.html
+-   <script src="https://unpkg.com/advent-2024@latest/util.js"></script>
 ```
